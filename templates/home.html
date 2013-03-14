@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %} Home page {% endblock %}
+
+
+{% block content %}
+<div class = "span3 well">
+	<h1 class = "page-header" style = "color: red;">Wellcome to Team4 Quizz Management</h1>
+</div>
+
+<div class = "container-fluid">
+	<div class = "row-fluid">
+		<div class = "span6" style = "padding-left: 10%;">
+			<form class = "well">
+				<fieldset class = "error">
+					<legend> <h1>User account</h1></legend>
+						<h3>Quizz Management</h3>
+						<p>If you have an account <a href = "/login/" class="btn btn-primary">Login</a> now</p>
+						<p>If not, feel free to  <a href = "/register/" class ="btn btn-primary">Regsiter</a> one</p>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+
+

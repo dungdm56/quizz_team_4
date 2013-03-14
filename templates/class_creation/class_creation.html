@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class = "contaner">
+	<div class ="span7 offset2">
+		<div class = "row-fluid" align = "center">
+			<form class = "well form-horizontal focused" action = "." method = "post" align = "center"> {% csrf_token %}
+				<legend><b>Create new class </b></legend>
+				<table class = "table">
+					<tr>
+						<td>Teacher Name: </td>	
+						<td></td> <td></td>
+						<td> <input type ="text" class= "input" name = "username" id = "username" placeholder = "Username" value = "{{username}}" </td>
+					</tr>
+					
+					<tr>
+						<td>Email: </td>
+						<td></td> <td></td>
+						<td> <input type = "password" class = "input" name = "password" id = "password" placeholder = "Password" value = "{{ password }}"</td>
+					</tr>
+					
+					<p style = "color: red; "> {{state}} </p>
+				</table>
+					<button type = "submit" class = "btn" value = "login">Create</button>
+					<button type = "reset" class = "btn" value = "reset" >Reset fields</button> </br> </br>
+					<p>Do not have account? <a href = "/register/">Sign up</a> now</p> </br> </br>
+			</form>
+		</div>	
+	</div>
+</div>
+{% endblock %}
