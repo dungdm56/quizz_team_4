@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %} Register {% endblock %}
+
+{% block content %} 
+<div class = "">
+		<div class = "well span6 offset2">
+			<form class = "focused register form-actions" method = "post" action = "." align = "center">
+			{% csrf_token %}
+				<legend>Create new account</legend>
+				<style type="text/css">
+					.errorlist li {
+						display: none;
+					}
+				</style>
+				<table class="well table controls">
+					{{ form.as_table }}
+				</table>
+				<br />
+				<center>
+				<button class = "btn" type = "submit" value = "Submit" name = "Submit">Register</button>
+				<button class = "btn btn-danger" type = "reset" value = "Reset" name = "Reset">Reset</button>
+				</center>
+			</form>
+		</div>
+</div>
+{% endblock %}
+
