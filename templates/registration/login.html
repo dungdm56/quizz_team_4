@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class = "contaner">
+	<div class ="span7 offset2">
+		<div class = "row-fluid" align = "center">
+			<form class = "well form-horizontal focused" action = "." method = "post" align = "center"> {% csrf_token %}
+				<legend><b>Login to your account </b></legend>
+				<table class = "table">
+					<tr>
+						<td>Username: </td>	
+						<td></td> <td></td>
+						<td> <input type ="text" class= "input" name = "username" id = "username" placeholder = "Username" value = "{{username}}" /> </td>
+					</tr>
+					
+					<tr>
+						<td>Password: </td>
+						<td></td> <td></td>
+						<td> <input type = "password" class = "input" name = "password" id = "password" placeholder = "Password" value = "{{ password }}" /></td>
+					</tr>
+					
+					<p style = "color: red; "> {{state}} </p>
+				</table>
+					<button type = "submit" class = "btn" value = "login">Login</button>
+					<button type = "reset" class = "btn btn-danger" value = "reset" >Reset fields</button> </br> </br>
+					<p>Do not have account? <a href = "/register/">Sign up</a> now</p> </br> </br>
+			</form>
+		</div>	
+	</div>
+</div>
+{% endblock %}
+
+{% block content_1 %}
+	<center><h3>You are in account : {{User.username}} !<br />Please <a href="/logout/">log in</a> to log in to another account !</h3></center>
+{% endblock %}

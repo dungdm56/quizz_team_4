@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<center><h3>You are not in an account !<br />Please <a href="/login/">log in</a> to create your class !</h3></center>
+{% endblock %}
+
+{% block content_1 %}
+<div class = "contaner">
+	<div class ="span7 offset2">
+		<div class = "row-fluid" align = "center">
+			<form class = "well form-horizontal focused" action = "." method = "post" align = "center"> {% csrf_token %}
+				<legend><b>Create new class </b></legend>
+				<table class = "table">
+					<tr>
+					  <td height="28">Name</td>
+					  <td>:</td>
+					  <td></td>
+					  <td><input type="text" class = "input" name = "class_name" id = "class_name" placeholder="Class's name" value="{{class_name}}"/></td>
+				  </tr>
+					<tr>
+					  <td height="24">Number Students</td>
+					  <td>:</td>
+					  <td></td>
+					  <td><input type="text" class = "span2" name = "Number_students" id = "Number_students" value="{{number_students}}"/>
+                       <!-- <div class="controls" align="left">
+                          <select id="select01"value= "number_students">
+                            <option selected="selected">Students</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>30</option>
+                            <option>40</option>
+                            <option>50</option>
+                          </select>
+                        </div>-->
+            		   </td>
+				  </tr>
+					<tr>
+						<td>Teacher Name </td>	
+						<td>:</td> <td></td>
+						<td> <input type ="text" class= "input" name = "username" id = "username" placeholder = "Username" value = "{{username}}"  /></td>
+					</tr>
+					
+					<tr>
+						<td>Email </td>
+						<td>:</td> <td></td>
+						<td> <input type = "password" class = "input" name = "password" id = "password" placeholder = "Password" value = "{{ password }}" /></td>
+					</tr>
+					
+					<p style = "color: red; "> {{state}} </p>
+				</table>
+					<button type = "submit" class = "btn" value = "login">Create</button>
+					<button type = "reset" class = "btn" value = "reset" >Reset fields</button> </br></br>
+			</form>
+		</div>	
+	</div>
+</div>
+{% endblock %}

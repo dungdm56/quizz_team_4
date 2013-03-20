@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %} Home page {% endblock %}
+
+
+{% block content %}
+    <div class = "span4 well focused">
+        <h1 class = "page-header" style = "color: green;">Wellcome to Team4 Quiz Management  <img src = "/static/images/smily/03_vvv.gif"></img></h1>
+    </div>
+    
+    <div class = "container-fluid">
+        <div class = "row-fluid">
+            <div class = "span5" style = "padding-left: 10%;">
+                <form class = "well focused">
+                    <fieldset class = "error">
+                        <legend> <h1>User account</h1></legend>
+                            <h3>Quizz Management</h3>
+                            <p>If you have an account <a href = "/login/" class="">Login</a> now</p>
+                            <p>If not, feel free to  <a href = "/register/" class ="">Regsiter</a> one</p>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content_1 %}
+	<div class  = "container-fluid" style = "padding-left: 5px;">
+		<div class = "span2 well focused">
+			<h1 style = "color: green;">Wellcome <strong> {{ User.username }} </strong></h1>
+		</div>
+	</div>
+{% endblock %}
+
