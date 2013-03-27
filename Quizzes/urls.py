@@ -18,11 +18,12 @@ image = os.path.join(
 
 
 from accounts.views import login_user, logout, home, signup, about,signup_success
-from class_creation.views import create_class
+from class_creation.views import create_class,classes,create_class_success,create_quizz
+from Quizzes.views import home
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'Quizzes.views.home', name='home'),
+    #url(r'^$', 'Quizzes.views.home', name='home'),
     # url(r'^Quizzes/', include('Quizzes.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
@@ -37,6 +38,9 @@ urlpatterns = patterns('',
     url(r'^register/$', signup),
     url(r'./register/$', signup),
     url(r'^create_class/$', create_class),
+    url(r'^create_class_success/([^\s]+)/$', create_class_success),
+    url(r'^create_quizz/$', create_quizz),
+    url(r'class/([^\s]+)/$', classes),
     url(r'^about/$', about),
     url(r'^signup_success/$', signup_success),
 	
