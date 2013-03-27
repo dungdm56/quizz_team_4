@@ -2,13 +2,13 @@ from django.db import models
 from django import forms
 import datetime
 from django.utils import timezone
-from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from cProfile import label
 from django.template.defaultfilters import default
 from django.forms.widgets import Widget
 from calendar import timegm
 from idlelib.AutoComplete import AutoComplete
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Classes(models.Model):
