@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}{% for Classes in Classes_list %}{{Classes.class_name}}{% endfor %}{% endblock %}
+
+
+{% block content %}
+    <center><h3>Sorry! You are not in account<br />Please <a href="/login/">log in </a> or <a href="register"> create new account </a>to use this page .</h3></center>
+{% endblock %}
+
+{% block content_1 %}
+<!-- Forms
+================================================== -->
+<section id="forms">
+    <div class="page-header">
+    	{% for Classes in Classes_list %}
+    		<h1>{{Classes.class_name}}</h1>
+        {%  endfor %}
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span4">
+            <h2>Information</h2>
+                <form class = "well form-horizontal focused" action = "." method = "post" align = "left"> {% csrf_token %}
+                	{% for  Classes in Classes_list %}
+                        <table class="table table-condensed" >
+                            <tr>
+                                <td width="106">Teacher's Name</td>
+                                <td width="10">:</td>
+                                <td width="171">{{Classes.teacher_name}}</td>
+                            </tr>
+                            <tr>
+                                <td>No. Students</td>
+                                <td>:</td>
+                                <td>{{Classes.number_students}}</td>
+                            </tr>
+                            <tr>
+                                <td>Account of Teacher</td>
+                                <td>:</td>
+                                <td><a href="#">{{Classes.user.username}}</a></td>
+                            </tr>
+                        </table>
+                    {% endfor %}
+                </form>
+            </div>
+            <div class="span7">
+                <h2>Quizzes</h2>
+              <p>&nbsp;</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

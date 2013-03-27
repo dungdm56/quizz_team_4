@@ -16,15 +16,11 @@ image = os.path.join(
 
 
 from accounts.views import login_user, logout, home, signup, about
+from class_creation.views import create_class
 
 urlpatterns = patterns('',
     # Examples:
     #url(r'^$', 'Quizzes.views.home', name='home'),
-    # url(r'^Quizzes/', include('Quizzes.foo.urls')),
+    url(r'^creat_class/', create_class),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    
 )

@@ -3,6 +3,7 @@ from django.core.context_processors import csrf
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from django.utils.archive import Archive
 admin.autodiscover()
 
 from django.conf import settings
@@ -16,7 +17,9 @@ image = os.path.join(
 )
 
 
-from accounts.views import login_user, logout, home, signup, about
+from accounts.views import login_user, logout, home, signup, about,signup_success
+from class_creation.views import create_class,classes,create_class_success,create_quizz
+from Quizzes.views import home
 
 urlpatterns = patterns('',
     # Examples:
@@ -33,7 +36,13 @@ urlpatterns = patterns('',
     url(r'^login/$', login_user),
     url(r'^logout/$', logout),
     url(r'^register/$', signup),
+    url(r'./register/$', signup),
+    url(r'^create_class/$', create_class),
+    url(r'^create_class_success/([^\s]+)/$', create_class_success),
+    url(r'^create_quizz/$', create_quizz),
+    url(r'class/([^\s]+)/$', classes),
     url(r'^about/$', about),
+    url(r'^signup_success/$', signup_success),
 	
 	
 	
