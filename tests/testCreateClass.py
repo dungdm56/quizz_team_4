@@ -14,26 +14,18 @@ class TestCreateClass(unittest.TestCase):
     
     def test_create_class(self):
         driver = self.driver
-        driver.get(self.base_url + "/login/")
-        driver.find_element_by_id("username").clear()
-        driver.find_element_by_id("username").send_keys("admin")
-        driver.find_element_by_id("password").clear()
-        driver.find_element_by_id("password").send_keys("naruto")
-        driver.find_element_by_css_selector("button.btn.btn-primary").click()
-        driver.find_element_by_link_text("Create Class").click()
+        driver.get(self.base_url + "/create_class/")
         driver.find_element_by_id("id_class_name").clear()
         driver.find_element_by_id("id_class_name").send_keys("K56-CA-Trial")
         driver.find_element_by_id("id_number_students").clear()
-        driver.find_element_by_id("id_number_students").send_keys("40")
+        driver.find_element_by_id("id_number_students").send_keys("50")
         driver.find_element_by_id("id_teacher_name").clear()
-        driver.find_element_by_id("id_teacher_name").send_keys("Võ Anh Hưng")
+        driver.find_element_by_id("id_teacher_name").send_keys("FinalDevil")
+        driver.find_element_by_css_selector("button.btn.btn-primary").click()
+        driver.find_element_by_id("id_class_name").clear()
+        driver.find_element_by_id("id_class_name").send_keys("K56-CA-Trial-1")
         driver.find_element_by_css_selector("button.btn.btn-primary").click()
         driver.find_element_by_link_text("click here").click()
-        driver.find_element_by_xpath("(//a[contains(text(),'admin')])[2]").click()
-        driver.find_element_by_xpath("(//a[contains(text(),'admin')])[2]").click()
-        driver.find_element_by_xpath("(//a[contains(text(),'admin')])[2]").click()
-        driver.find_element_by_xpath("(//a[contains(text(),'admin')])[2]").click()
-        driver.find_element_by_xpath("(//a[contains(text(),'admin')])[2]").click()
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
