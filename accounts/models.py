@@ -12,7 +12,7 @@ class RegistrationForm(forms.Form):
     username = forms.CharField(label = 'Username', max_length = 30)
     full_name = forms.CharField(label = 'Full name', max_length = 60)
     email1 = forms.EmailField(label = 'Email', max_length = 30)
-    email2 = forms.EmailField(label = 'Email confirmation', max_length = 30,)
+    email2 = forms.EmailField(label = 'Email confirmation', max_length = 30)
     password1 = forms.CharField(label = 'Password', widget = forms.PasswordInput)
     password2 = forms.CharField(label = 'Password comfirmation', widget = forms.PasswordInput)
 
