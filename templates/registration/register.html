@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block title %} Register {% endblock %}
-{% block extend_header %}{% endblock %}
 
 {% block content_1 %}
 	<center><h3>Sorry ! You are in an account : {{User.username}}<br />Please <a href="/logout/">Log out</a> to create an new account</h3></center>
@@ -15,7 +14,6 @@
                     <legend>Create new account</legend>
                     <style type="text/css">
                         .errorlist li {
-							padding-left: 0px;
                             font-size: 12px;
                             color: red;
                             display: block;
@@ -26,7 +24,7 @@
                     </table>
                     <br />
                     <center>
-                    <button class = "btn" type = "submit" value = "Submit" name = "Submit">Register</button>
+                    <button class = "btn btn-primary" type = "submit" value = "Submit" name = "Submit">Register</button>
                     <button class = "btn btn-danger" type = "reset" value = "Reset" name = "Reset">Reset</button>
                     </center>
                 </form>

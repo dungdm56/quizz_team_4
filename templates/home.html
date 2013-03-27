@@ -4,18 +4,18 @@
 
 {% block content %}
     <div class = "span4 well focused">
-        <h1 class = "page-header" style = "color: green;">Wellcome to Team4 Quiz Management  <img src = "/static/images/smily/03_vvv.gif"></img></h1>
+        <center ><h1 class = "page-header" style = "color: green;">Wellcome to <br />Team4 Quiz Management  <img src = "/static/images/smily/03_vvv.gif"></img></h1></center>
     </div>
     
     <div class = "container-fluid">
         <div class = "row-fluid">
-            <div class = "span5" style = "padding-left: 10%;">
-                <form class = "well focused">
+            <div class = "span6" style = "padding-left: 10%;">
+                <form class = "well">
                     <fieldset class = "error">
                         <legend> <h1>User account</h1></legend>
                             <h3>Quizz Management</h3>
-                            <p>If you have an account <a href = "/login/" class="">Login</a> now</p>
-                            <p>If not, feel free to  <a href = "/register/" class ="">Regsiter</a> one</p>
+                            <p>If you have an account. <a href = "/login/">Login</a> now</p>
+                            <p>If not, feel free to  <a href = "/register/">regsiter</a> one</p>
                     </fieldset>
                 </form>
             </div>
@@ -24,10 +24,31 @@
 {% endblock %}
 
 {% block content_1 %}
-	<div class  = "container-fluid" style = "padding-left: 5px;">
-		<div class = "span2 well focused">
-			<h1 style = "color: green;">Wellcome <strong> {{ User.username }} </strong></h1>
-		</div>
-	</div>
+	<div class="span3">
+        <div class="well">
+        	<center>
+                <a href="#"><img src="../static/images/account.png" width="128" height="128" longdesc="../static/images/account.png" /></a><br />
+                <a href="#"><h2>{{ User.username }}</h2></a>
+            </center>
+        </div>
+    </div>
+    <div class="span7">
+    	<div class="well">
+        	<h3>List of classes created by this account</h3>
+            <br />
+            	{% for Classes in Classes_list %}
+                	<a href="/class/{{Classes.id}}" >{{Classes.class_name}}</a><br />
+                {% endfor %}
+            <br />
+            <br />
+            <h3>Another classes</h3>
+            <br />
+            	{% for Classes in Classes_list2 %}
+                	<a href="/class/{{Classes.id}}" >{{Classes.class_name}}</a><br />
+                    <font size="1">Created by <a href="#">{{Classes.user.username}}</a></font><br />
+                {% endfor %}
+            <br />
+        </div>
+    </div>
 {% endblock %}
 
