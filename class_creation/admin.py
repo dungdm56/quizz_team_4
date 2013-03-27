@@ -10,9 +10,12 @@ class QuizzesInline(admin.TabularInline):
     extra= 3
 #===============================================================================
 class ClassesAdmin(admin.ModelAdmin):
-    fieldsets= [('Class_name', {'fields': ['Name']}), ('Teacher',{'fields': ['Teacher']}) ]
+    fieldsets= [('Class name', {'fields': ['class_name']}),
+                ('Number Students', {'fields': ['number_students']}),
+                ('Teacher',{'fields': ['teacher_name']}),
+                ('User created',{'fields': ['user']})]
     inlines= [QuizzesInline]
-    list_display=('Name', 'Teacher')
+    list_display=('class_name', 'teacher_name')
     
     #===========================================================================
     # list_display=('name', 'Teacher')
