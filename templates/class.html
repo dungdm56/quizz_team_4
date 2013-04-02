@@ -1,9 +1,5 @@
 {% extends "base.html" %}
-<<<<<<< HEAD
 {% block title %} {{Classes_list.class_name}} {% endblock %}
-=======
-{% block title %}{% for Classes in Classes_list %}{{Classes.class_name}}{% endfor %}{% endblock %}
->>>>>>> 648a7ce507929710a964577a83ee51c1cb9b78f6
 
 
 {% block content %}
@@ -15,19 +11,12 @@
 ================================================== -->
 <section id="forms">
     <div class="page-header">
-<<<<<<< HEAD
     	<h1>{{Classes_list.class_name}}</h1>
-=======
-    	{% for Classes in Classes_list %}
-    		<h1>{{Classes.class_name}}</h1>
-        {%  endfor %}
->>>>>>> 648a7ce507929710a964577a83ee51c1cb9b78f6
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
           <div class="span4">
             <h2>Information</h2>
-<<<<<<< HEAD
                 <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
                     <table class="table table-condensed " >
                         <tr>
@@ -83,32 +72,6 @@
                             <center><a href="/create_quizz/{{Classes_list.id}}/" class="btn btn-success" align="right"><i class = "icon icon-plus"></i> Create new Quizzes</a></center>
                         {% endif %}
                     </form>
-=======
-                <form class = "well form-horizontal focused" action = "." method = "post" align = "left"> {% csrf_token %}
-                	{% for  Classes in Classes_list %}
-                        <table class="table table-condensed" >
-                            <tr>
-                                <td width="106">Teacher's Name</td>
-                                <td width="10">:</td>
-                                <td width="171">{{Classes.teacher_name}}</td>
-                            </tr>
-                            <tr>
-                                <td>No. Students</td>
-                                <td>:</td>
-                                <td>{{Classes.number_students}}</td>
-                            </tr>
-                            <tr>
-                                <td>Account of Teacher</td>
-                                <td>:</td>
-                                <td><a href="#">{{Classes.user.username}}</a></td>
-                            </tr>
-                        </table>
-                    {% endfor %}
-                </form>
-            </div>
-            <div class="span7">
-                <h2>Quizzes</h2>
->>>>>>> 648a7ce507929710a964577a83ee51c1cb9b78f6
               <p>&nbsp;</p>
             </div>
         </div>

@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 
-<<<<<<< HEAD
 {% block title %}Class {{Classes_list.class_name}} created successful{% endblock %}
-=======
-{% block title %}{% for Classes in Classes_list %}{{Classes.class_name}} class created successful{% endfor %}{% endblock %}
->>>>>>> 648a7ce507929710a964577a83ee51c1cb9b78f6
 
 
 
@@ -13,23 +9,11 @@
 {% endblock %}
 
 {% block content_1 %}
-<<<<<<< HEAD
     <center>
         <font color="#33CC33"><h2>Congratulation !<br />The class <font color="#6633CC">{{Classes_list.class_name}}</font> have been created successful at {{Classes_list.Update_time}} in {{Classes_list.Update_date}} !</h2><br /></font>
         <h3>Please <a href="/class/{{Classes_list.id}}/">click here</a> to go to this class !</h3>
 	</center>
     <br />
     <br />
-=======
-    {% for Classes in Classes_list %}
-    <center>
-        <h2>Congratulation !<br />The class <font color="#6633CC">{{Classes.class_name}}</font> have been created successful !</h2><br />
-        <h3>Please <a href="/class/{{Classes.id}}/">click here</a> to go to this class !</h3>
-	</center>
-    <br />
-    <br />
-    
-	{% endfor %}
->>>>>>> 648a7ce507929710a964577a83ee51c1cb9b78f6
 {% endblock %}
 

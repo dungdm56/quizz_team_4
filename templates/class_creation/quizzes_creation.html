@@ -9,11 +9,7 @@
 <div class = "contaner">
 	<div class ="span7 offset2">
 		<div class = "row-fluid" align = "center">
-<<<<<<< HEAD
 			<form class = "well form-horizontal" action = "." method = "post" align = "center">
-=======
-			<form class = "well form-horizontal focused" action = "." method = "post" align = "center">
->>>>>>> 648a7ce507929710a964577a83ee51c1cb9b78f6
             {% csrf_token %}
 			  <legend><b>Make new Quizz </b></legend>
                	<style type="text/css">
@@ -24,21 +20,6 @@
 					}
 				</style>
 				<table class = "table">
-<<<<<<< HEAD
-=======
-                	<tr>
-                    	<td>
-                        	Class :
-                        </td>
-                        <td>
-                            <select multiple="multiple" id="Class" name="Class">
-                            	{% for Classes in Classes_list %}
-                                	<option>{{Classes.class_name}}</option>
-                                {% endfor %}
-                            </select>
-                        </td>
-                    </tr>
->>>>>>> 648a7ce507929710a964577a83ee51c1cb9b78f6
                     {{form.as_table}}
                     
                     <p style = "color: red; "> {{state}} </p>
