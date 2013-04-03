@@ -11,12 +11,12 @@
 ================================================== -->
 <section id="forms">
     <div class="page-header">
-    	<h1>{{Classes_list.class_name}}</h1>
+    	<font color="#66CC99"><h1>{{Classes_list.class_name}}</h1></font>
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
           <div class="span4">
-            <h2>Information</h2>
+            <font color="#0033FF"><h2>Information</h2></font>
                 <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
                     <table class="table table-condensed " >
                         <tr>
@@ -35,10 +35,13 @@
                             <td><a href="#">{{Classes_list.user.username}}</a></td>
                         </tr>
                     </table>
+                    {% if User = Classes_list.user %}
+                    	<center><a href="/edit_class/{{Classes_list.id}}/" class="btn btn-info" align="right"><i class = "icon icon-repeat"></i> Change information</a></center>
+                    {% endif %}
                 </form>
             </div>
             <div class="span8">
-                <h2>Quizzes</h2>
+                <font color="#0033FF"><h2>Quizzes</h2></font>
                     <form class = "well form-horizontal" action = "." method = "post" align = "center"> {% csrf_token %}
                     	<table class="table table-striped table-bordered">
                        		<tr class="focused">
@@ -55,10 +58,10 @@
                     		{% for Quizzes in Quizzes_list %}
                             	<tr >
                                 	<td>
-                        				<a href="#">{{Quizzes.Title}}</a>
+                        				<a href="/quizzes/{{Quizzes.id}}/">{{Quizzes.Title}}</a>
                                     </td>
                                     <td>
-                                    	<center> </center>
+                                    	<center>{{Quizzes.Number_questions}} questions </center>
                                     </td>
                                     <td>
                                     	<center>{{Quizzes.Time_limit}} minutes</center>

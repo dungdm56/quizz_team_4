@@ -31,7 +31,7 @@ class RegistrationClassForm(forms.Form ):
     
     class Meta:
         model = Classes
-                
+        
     def clean_class_name(self):
         class_name = self.cleaned_data['class_name']
         if not class_name :
@@ -55,12 +55,34 @@ class RegistrationClassForm(forms.Form ):
             raise forms.ValidationError('Enter the name of teacher!')
         return teacher_name
 
+class RegistrationClassForm2(forms.Form ):
+    number_students = forms.IntegerField(label='Number students')
+    teacher_name = forms.CharField(label='Teacher name',max_length=200)
+    
+    class Meta:
+        model = Classes
+        
+    def clean_number_students(self):
+        number_students = self.cleaned_data['number_students']
+        if not number_students:
+            raise forms.ValidationError('Enter the number of students')
+        if number_students > 50:
+            raise forms.ValidationError('The number of students must less than or equal 50')
+        return number_students
+    
+    def clean_teacher_name(self):
+        teacher_name = self.cleaned_data['teacher_name']
+        if not teacher_name :
+            raise forms.ValidationError('Enter the name of teacher!')
+        return teacher_name
+
 class Quizzes(models.Model):
     Class= models.ForeignKey(Classes,db_column='in_class')
     Title= models.CharField(max_length= 200)
     Update_time=  models.TimeField('date published')
     Update_date = models.DateField('Date published')
     Time_limit= models.IntegerField()
+    Number_questions = models.IntegerField()
     
     def __unicode__(self):
         return self.Title
@@ -84,11 +106,11 @@ class MakeQuizzForm(forms.Form):
 class Questions(models.Model):
     quizz= models.ForeignKey(Quizzes)
     Ques= models.TextField(max_length= 1000)
-    Ans1= models.TextField(max_length= 500)
-    Ans2= models.TextField(max_length= 500)
-    Ans3= models.TextField(max_length= 500)
-    Ans4= models.TextField(max_length= 500)
-    Correct_ans= models.TextField(max_length= 500)
+    Ans1= models.CharField(max_length= 500)
+    Ans2= models.CharField(max_length= 500)
+    Ans3= models.CharField(max_length= 500)
+    Ans4= models.CharField(max_length= 500)
+    Correct_ans= models.IntegerField()
 
 class MakeQuestionsForm(forms.Form):
     Ques= forms.CharField(label='Question',max_length= 1000)
@@ -96,7 +118,7 @@ class MakeQuestionsForm(forms.Form):
     Ans2= forms.CharField(label='Answer 2',max_length= 500)
     Ans3= forms.CharField(label='Answer 3',max_length= 500)
     Ans4= forms.CharField(label='Answer 4',max_length= 500)
-    Correct_ans= forms.CharField(label='Answer correct',max_length= 500)
+    Correct_ans= forms.IntegerField(label='Answer correct')
         
         
     

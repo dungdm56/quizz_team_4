@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block title %}{{Quizzes.Title}}{% endblock %}
+
+<script type="text/javascript" src="/static/bootstrap/js/clock.js"></script>
+
+{% block content %}
+    <center><h3>Sorry! You are not in account<br />Please <a href="/login/">log in </a> or <a href="register"> create new account </a>to use this page .</h3></center>
+{% endblock %}
+
+{% block content_1 %}
+<!--
+==================================================
+<FORM name="form1" class="navbar-fixed-top">
+	<input type="text" name="time" size="30" value=""> 
+	<input type="hidden" name="time2" size="0" value="{{Quizzes.Time_limit}}">
+</FORM>
+
+<script> start(); </script>
+<!-- clock
+================================================== -->
+{% if Quizzes.Number_questions != 0 %}
+	<script language="JavaScript">
+        function auto_sub(){
+            alert("Time out! The system will auto submit result and calculate your result !");
+            document.answer.submit();
+        }
+        function auto_sub1(){
+            setTimeout("auto_sub()",{{Quizzes.Time_limit}}*60000);
+        }
+        auto_sub1();
+    </script>
+{% endif %}
+<!--Form
+==================================================-->
+<section id="forms">
+    <div class="page-header">
+    	<font color="#66CC99"><h1>{{Quizzes.Title}}</h1></font>
+    </div>
+    
+    {% if Quizzes.Number_questions != 0 %}
+    
+    <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span4">
+            <font color="#0033FF"><h2>Information</h2></font>
+                <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
+                    <table class="table table-condensed " >
+                        <tr>
+                            <td width="106"><h5>Start time</h5></td>
+                            <td width="10">:</td>
+                            <td width="171">
+                            	<script language="javascript">
+								<!-- 
+								today = new Date();
+								document.write(today.getHours()," : ",today.getMinutes()," on ", today.getDate()," / ",today.getMonth()+1);
+								//-->
+								</script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><h5>Finish Time</h5></td>
+                            <td>:</td>
+                            <td>
+                            	<script language="javascript">
+								<!-- 
+								today = new Date();
+								minute1 = today.getMinutes()+ {{Quizzes.Time_limit}};
+								minute = minute1 % 60;
+								hour1 = today.getHours() + ( minute1 - minute)/60;
+								hour = hour1 % 24;
+								date = today.getDate() + (hour1 - hour )/24;
+								document.write(hour," : ",minute ," on ",date," / ",today.getMonth()+1);
+								//-->
+								</script>
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td><h5>Time Remaining</h5>
+                            </td>
+                            <td>:</td>
+                            <td>
+                            <li class="lino"><font color="#FF0033" size="3"><span id="time1">10</span></font> <i>mins</i> <font color="#FF0033" size="3"><span id="time">10</span></font> <i>secs</i>
+                            <script type="text/javascript"> 
+								var jgt = 58;
+								var jgt2 = {{Quizzes.Time_limit}} - 1;
+								document.getElementById('time').innerHTML = jgt;
+								document.getElementById('time1').innerHTML = jgt2;
+								function stime(){
+									document.getElementById('time').innerHTML = jgt;
+									document.getElementById('time1').innerHTML = jgt2;
+									jgt = jgt - 1;
+									if(jgt == -1){
+										jgt = 59;
+										jgt2 = jgt2 - 1;
+									}
+									if(jgt == 0 && jgt2 ==0){
+										clearInterval(timing);
+									}
+								}
+								var timing = setInterval("stime();",1000);
+							</script>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            
+            {% if User != Quizzes.Class.user %}
+            
+            <div class="span8">
+                <font color="#0033FF"><h2>Quizzes</h2></font>
+                    <form class = "well form-horizontal" action = "." method = "post" name="answer" align = "center"> {% csrf_token %}
+                        {% for Questions in Questions_list %}
+                        	<h5>{{Questions.Ques}}</h5><br />
+                            <label class="radio">
+                                <input type="radio" name="Answer{{Questions.id}}" id="Answer1" value="1"><font color="#6633CC">A.</font> {{Questions.Ans1}}
+                            </label>
+                            <label class="radio">
+                                <input type="radio" name="Answer{{Questions.id}}" id="Answer2" value="2"><font color="#6633CC">B.</font> {{Questions.Ans2}}
+                            </label>
+                            <label class="radio">
+                                <input type="radio" name="Answer{{Questions.id}}" id="Answer3" value="3"><font color="#6633CC">C.</font> {{Questions.Ans3}}
+                            </label>
+                            <label class="radio">
+                                <input type="radio" name="Answer{{Questions.id}}" id="Answer4" value="4"><font color="#6633CC">D.</font> {{Questions.Ans4}}
+                            </label>
+                            <br />
+                        {% endfor %}
+                        <button type="submit" class="btn btn-success" >Submit</button>
+                    </form>
+              <p>&nbsp;</p>
+            </div>
+            
+            {% endif %}
+            
+        </div>
+    </div>
+    
+    {% else %}
+    	<div class="container-fluid">
+        	<div class="row-fluid">
+                <div class="span12">
+                    <font color="#FF0000"><h2>Sorry</h2></font>
+                    <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
+                        <center>
+                            <img src="/static/images/ban.gif" alt="--Sorry--" width="192" height="192"  />
+                            <br /><br /><br /><font size="3" color="#FF0000"><b>Sorry! This Quizz don't have any questions to you can do !<br />
+                            Please visit page after teacher of this class update questions! Thanks you.</b></font>
+                        </center>
+                    </form>
+                </div>
+            </div>
+         </div>
+    {% endif %}
+    
+{% endblock %}
+

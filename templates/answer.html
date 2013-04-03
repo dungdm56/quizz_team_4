@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %} {{Quizzes.Title}} Answers {% endblock %}
+{% block content %}
+<center><h3>Sorry! You are not in account<br />Please <a href="/login/">log in </a> or <a href="register"> create new account </a>to use this page .</h3></center>
+{% endblock %}
+
+{% block content_1 %}
+<!-- Forms
+================================================== -->
+<section id="forms">
+    <div class="page-header">
+    	<font color="#66CC99"><h1>{{Quizzes.Title}}</h1></font>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span4">
+            <h2><font color="#0033FF">Information</font></h2>
+                <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
+                    <table class="table table-condensed " >
+                        <tr>
+                            <td width="106">Title</td>
+                            <td width="10">:</td>
+                            <td width="171">{{Quizzes.Title}}</td>
+                        </tr>
+                        <tr>
+                            <td>Time limit</td>
+                            <td>:</td>
+                            <td>{{Quizzes.Time_limit}} minutes</td>
+                        </tr>
+                        <tr>
+                            <td>Date create</td>
+                            <td>:</td>
+                            <td>{{Quizzes.Update_time}} {{Quizzes.Update_date}}</td>
+                        </tr>
+                        <tr>
+                            <td>Class</td>
+                            <td>:</td>
+                            <td><a href="/class/{{Quizzes.Class.id}}/">{{Quizzes.Class.class_name}}</a></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            
+            
+            <div class="span8">
+                <font color="#0033FF"><h2>Answer</h2></font>
+                
+                <form class = "well form-horizontal" action = "." method = "post" align = "center"> {% csrf_token %}
+                    <center >
+                        <font color="#00CC66"><h3>The answers for questions in {{Quizzes.Title}} quizzes</h3></font>
+                        <hr align="center" color="#CC0000" noshade size="3" width="80%">
+                        <table class="table table-striped">
+                        	<thead>
+                                <tr>
+                                    <th><font color="#0033FF">Question</font></th>
+                                    <th><font color="#0033FF">Correct answers</font></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for Questions in Questions_list %}
+                                <tr>
+                                	<td >{{Questions.Ques}}</td>
+                                    <td >
+                                    	{% if Questions.Correct_ans = 1 %}
+                                        	A. {{Questions.Ans1}}
+                                        {% else %}
+                                            {% if Questions.Correct_ans = 2 %}
+                                                B. {{Questions.Ans2}}
+                                            {% else %}
+                                                {% if Questions.Correct_ans = 3 %}
+                                                    C. {{Questions.Ans3}}
+                                                {% else %}
+                                                    D. {{Questions.Ans4}}
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <br />
+                    </center>
+                </form>
+            </div>
+        
+        </div>
+    </div>
+{% endblock %}
+
