@@ -52,12 +52,8 @@ class TestViews(TestCase):
     def test_home_page(self):
         resp = self.client.get('/home/')
         self.assertEqual(resp.status_code, 200)
-    
-    def test_login(self):
-        is_logged_in = self.client.login(username = 'admin', password = 'admin')
-        self.assertEqual(is_logged_in, True)
-    
-    def test_register(self):
+        
+    def test_signup(self):
         response = self.client.get('/register/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Create new account')
@@ -65,7 +61,23 @@ class TestViews(TestCase):
         
         response = self.client.post('/register/', {'username': 'abc', 'password' : 'abc', 'email': 'abc@gmail.com'})
         self.assertEqual(response.status_code, 200)
+    
+    def test_login_user(self):
+        is_logged_in = self.client.login(username = 'admin', password = 'admin')
+        self.assertEqual(is_logged_in, True)
+    
+    def test_logout(self):
+        self.client.login(username = 'admin', password = 'admin')
+        is_logged_out = self.client.logout()
+        self.assertEqual(is_logged_out, None)
         
+    def test_about_page(self):
+        response = self.client.get('/about/')
+        self.assertEqual(response.status_code, 200)
         
-
+    def test_signup_success(self):
+        response = self.client.get('/signup_success/')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'failure', 0)
+        self.assertContains(response, 'Successfully', 1)
         
