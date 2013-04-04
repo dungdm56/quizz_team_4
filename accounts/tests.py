@@ -8,51 +8,64 @@ Replace this with more appropriate tests for your application.
 from django.test import TestCase, Client
 from models import *
 import unittest
+from django.contrib.auth import authenticate
 
 class TestUser(TestCase):
-    fixtures = ['accounts_views_testdata.json']
+    #fixtures = ['accounts_views_testdata.json']
     
     def setUp(self):
-        self.user1 = User.objects.create(
+        self.user1 = User.objects.create_user(
             username = 'user1',
             password = 'pass1',
             email = 'email1@gmail.com',
         )
-        self.user2 = User.objects.create(
+        self.user2 = User.objects.create_user(
             username = 'user2',
             password = 'pass2',
             email = 'email2@gmail.com',               
         )
+        self.user1.save()
+        self.user2.save()
+        
+    def test_form(self):
+        
+        #Test artribute
+        self.assertEqual(self.user1.username, 'user1')
+        self.assertEqual(self.user1.id, 1)
+        self.assertEqual(self.user2.id, 2)
+        
+        self.user2.email = 'email22@gmail.com'
+        self.assertEqual(self.user2.email, 'email22@gmail.com')
+        
+class TestViews(TestCase):
+    #fixtures = ['accounts_views_testdata.json']
+    
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username = 'admin',
+            password = 'admin',
+            email = 'admin@gmail.com',
+        )
+        self.user.save()
+        self.client = Client()
         
     def test_home_page(self):
         resp = self.client.get('/home/')
         self.assertEqual(resp.status_code, 200)
-        
-    def test_form(self):
-        
-        self.assertEqual(self.user1.username, 'user1')
-        self.assertEqual(self.user1.id, 1)
-        
-        self.user2.email = 'email22@gmail.com'
-        self.assertEqual(self.user2.email, 'email22@gmail.com')
-        self.assertEqual(self.user1.password, 'pass1')
-        
-        c = Client()
-        c.login(username = self.user1.username, password = self.user1.password)
-
-class TestViews(TestCase):
-    def setUp(self):
-        self.client = Client()
-        
+    
+    def test_login(self):
+        is_logged_in = self.client.login(username = 'admin', password = 'admin')
+        self.assertEqual(is_logged_in, True)
+    
     def test_register(self):
         response = self.client.get('/register/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Create new account')
+        self.assertContains(response, 'Password comfirmation')
         
         response = self.client.post('/register/', {'username': 'abc', 'password' : 'abc', 'email': 'abc@gmail.com'})
         self.assertEqual(response.status_code, 200)
         
         
 
-        
         
