@@ -11,7 +11,7 @@
 		<div class = "row-fluid" align = "center">
 			<form class = "well form-horizontal focused" action = "." method = "post" align = "center">
             {% csrf_token %}
-			  <legend><b>Create new Quizzes </b></legend>
+			  <legend><b>Create new question in <a href="/quizzes/{{Quizzes.id}}/">{{Quizzes.Title}} Quizzes</a></b></legend>
                	<style type="text/css">
 					.errorlist li {
 						font-size: 12px;
@@ -20,7 +20,65 @@
 					}
 				</style>
 				<table class = "table">
-                    {{form.as_table}}
+                	<tr>
+                    	<td>
+                        	<h5>Question</h5>
+                        </td>
+                    	<td>:</td>
+                        <td>
+                        	<textarea class="input-xlarge" rows = "2.5" type="text" name="Ques" id="Ques" placeholder="Enter the question in here" value="{{Ques}}" ></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<h5>Answer 1</h5>
+                        </td>
+                    	<td>:</td>
+                        <td>
+                        	<textarea class="input-xlarge" rows = "1.5" type="text" name="Ans1" id="Ans1" placeholder="Enter the first answer in here" value="{{Ans1}}" ></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<h5>Answer 2</h5>
+                        </td>
+                    	<td>:</td>
+                        <td>
+                        	<textarea class="input-xlarge" rows = "1.5" type="text" name="Ans2" id="Ans2" placeholder="Enter the second answer in here" value="{{Ans2}}" ></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<h5>Answer 3</h5>
+                        </td>
+                    	<td>:</td>
+                        <td>
+                        	<textarea class="input-xlarge" rows = "1.5" type="text" name="Ans3" id="Ans3" placeholder="Enter the third answer in here" value="{{Ans3}}" ></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<h5>Answer 4</h5>
+                        </td>
+                    	<td>:</td>
+                        <td>
+                        	<textarea class="input-xlarge" rows = "1.5" type="text" name="Ans4" id="Ans4" placeholder="Enter the four answer in here" value="{{Ans4}}" ></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<h5>The correct answer</h5>
+                        </td>
+                    	<td>:</td>
+                        <td>
+                        	<select id="correct_ans" name="correct_ans">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select> 
+                        </td>
+                    </tr>
                     <p style = "color: red; "> {{state}} </p>
                 </table>
 					<button type = "submit" class = "btn btn-primary" value = "Submit">Create</button>
