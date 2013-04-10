@@ -1,106 +1,112 @@
 {% extends "base.html" %}
-{% block title %} {{Quizzes.Title}} Result {% endblock %}
-{% block content %}
-<center><h3>Sorry! You are not in account<br />Please <a href="/login/">log in </a> or <a href="register"> create new account </a>to use this page .</h3></center>
+
+<!--Title-->
+{% block title %} {{Quizzes.title}} Result {% endblock %}
+
+<!--body-->
+{% block content_before_login %}
+<center><h3>Sorry! You are not in account<br />Please <a href="/login/">log in </a> or <a href="/register/"> create new account </a>to use this page .</h3></center>
 {% endblock %}
 
-{% block content_1 %}
+
 <!-- Forms
 ================================================== -->
-<section id="forms">
-    <div class="page-header">
-    	<font color="#66CC99"><h1>{{Quizzes.Title}}</h1></font>
-    </div>
-    <div class="container-fluid">
-        <div class="row-fluid">
-          <div class="span4">
-            <h2><font color="#0033FF">Information</font></h2>
-                <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
-                    <table class="table table-condensed " >
-                        <tr>
-                            <td width="106">Title</td>
-                            <td width="10">:</td>
-                            <td width="171">{{Quizzes.Title}}</td>
-                        </tr>
-                        <tr>
-                            <td>Time limit</td>
-                            <td>:</td>
-                            <td>{{Quizzes.Time_limit}} minutes</td>
-                        </tr>
-                        <tr>
-                            <td>Date create</td>
-                            <td>:</td>
-                            <td>{{Quizzes.Update_time}} {{Quizzes.Update_date}}</td>
-                        </tr>
-                        <tr>
-                            <td>Class</td>
-                            <td>:</td>
-                            <td><a href="/class/{{Quizzes.Class.id}}/">{{Quizzes.Class.class_name}}</a></td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-            
-            
-            <div class="span8">
-                <font color="#0033FF"><h2>Result</h2></font>
-                
-                <form class = "well form-horizontal" action = "." method = "post" align = "center"> {% csrf_token %}
-                    <center >
-                        <font color="#00CC66"><h3>Result after you completed {{Quizzes.Title}} quizzes</h3></font><br /><br />
-                        
-                        <table class="table table-striped">
-                        	<thead>
-                                <tr>
-                                    <th><center>Total question</center></th>
-                                    <th><center>Correct answers</center></th>
-                                    <th><center>Wrong answers</center></th>
-                                    <th><center>Incomplete answer</center></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                	<td ><center>{{leng}} questions</center></td>
-                                    <td ><center>{{mark}} questions</center></td>
-                                    <td ><center>{{wrong}} questions</center></td>
-                                    <td ><center>{{empty}} questions</center></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <br />
-                        <font size="3" color="#33CC33">{{percent}}%</font>
-                    </center>
-                    <div class="progress progress-success progress-striped active">
-                        <div class="bar" style="width: {{percent}}%"></div>
-                    </div>
-                    <br />
-                    <center>
-                        {% if percent = 100 %}
-                            <font size="5" color="#33CC33"><h3>Excellent !</h3></font><br />
-                            <i>You can see answers for this Quizzes in <a href="/answer/{{Quizzes.id}}/">here</a> !</i>
-                        {% else %}
-                            {% if percent >= 75 %}
-                                <font size="5" color="#3366FF"><h3>Very Good !</h3></font>
-                            {% else %}
-                                {% if percent >= 50 %}
-                                    <font size="5" color="#FF9900"><h3>Good !</h3></font>
-                                {% else %}
-                                    {% if percent >= 25 %}
-                                        <font size="5" color="#FF66CC"><h3>Fair !</h3></font>
-                                    {% else %}
-                                        <font size="5" color="#FF0000"><h3>Pour !</h3></font>
-                                    {% endif %}
-                                {% endif %}
-                            {% endif %}
-                            
-                           <i> You can test again to have better result in <a href="/quizzes/{{Quizzes.id}}/">here</a> or see answers for this Quizzes in <a href="/answer/{{Quizzes.id}}/">here</a> !</i>
-                    
-                    	{% endif %}
-                    </center>
-                </form>
-            </div>
-        
-        </div>
-    </div>
+{% block content_after_login %}
+	<section id="forms">
+		<div class="page-header">
+			<font color="#66CC99"><h1>{{Quizzes.title}}</h1></font>
+		</div>
+		<div class="container-fluid">
+			<div class="row-fluid">
+			  <div class="span4">
+				<h2><font color="#0033FF">Information</font></h2>
+					<form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
+						<table class="table table-condensed " >
+							<tr>
+								<td width="106">Title</td>
+								<td width="10">:</td>
+								<td width="171">{{Quizzes.title}}</td>
+							</tr>
+							<tr>
+								<td>Time limit</td>
+								<td>:</td>
+								<td>{{Quizzes.time_limit}} minutes</td>
+							</tr>
+							<tr>
+								<td>Date create</td>
+								<td>:</td>
+								<td>{{Quizzes.update_time}} {{Quizzes.update_date}}</td>
+							</tr>
+							<tr>
+								<td>Class</td>
+								<td>:</td>
+								<td><a href="/class/{{Quizzes.in_class.id}}/">{{Quizzes.in_class.class_name}}</a></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				
+				
+				<div class="span8">
+					<font color="#0033FF"><h2>Result</h2></font>
+					
+					<form class = "well form-horizontal" action = "." method = "post" align = "center"> {% csrf_token %}
+						<center >
+							<font color="#00CC66"><h3>Result after you completed {{Quizzes.title}} quizzes</h3></font><br /><br />
+							
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th><center>Total question</center></th>
+										<th><center>Correct answers</center></th>
+										<th><center>Wrong answers</center></th>
+										<th><center>Incomplete answer</center></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td ><center>{{leng}} questions</center></td>
+										<td ><center>{{mark}} questions</center></td>
+										<td ><center>{{wrong}} questions</center></td>
+										<td ><center>{{empty}} questions</center></td>
+									</tr>
+								</tbody>
+							</table>
+							<br />
+							<font size="3" color="#33CC33">{{percent}}%</font>
+						</center>
+						<div class="progress progress-success progress-striped active">
+							<div class="bar" style="width: {{percent}}%"></div>
+						</div>
+						<br />
+						<center>
+							{% if percent = 100 %}
+								<font size="5" color="#33CC33"><h3>Excellent !</h3></font><br />
+								<i>You can see answers for this Quizzes in <a href="/answer/{{Quizzes.id}}/">here</a> !</i>
+							{% else %}
+								{% if percent >= 75 %}
+									<font size="5" color="#3366FF"><h3>Very Good !</h3></font>
+								{% else %}
+									{% if percent >= 50 %}
+										<font size="5" color="#FF9900"><h3>Good !</h3></font>
+									{% else %}
+										{% if percent >= 25 %}
+											<font size="5" color="#FF66CC"><h3>Fair !</h3></font>
+										{% else %}
+											<font size="5" color="#FF0000"><h3>Pour !</h3></font>
+										{% endif %}
+									{% endif %}
+								{% endif %}
+								
+							   <i> You can test again to have better result in <a href="/quizzes/{{Quizzes.id}}/">here</a> or see answers for this Quizzes in <a href="/answer/{{Quizzes.id}}/">here</a> !</i>
+						
+							{% endif %}
+						</center>
+					</form>
+				</div>
+			
+			</div>
+		</div>
+	</section>
 {% endblock %}
 

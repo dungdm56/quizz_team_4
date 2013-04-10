@@ -1,33 +1,36 @@
 {% extends "base.html" %}
+
+<!--Title-->
 {% block title %}Create Quizzes{% endblock %}
 
-{% block content %}
+<!--body-->
+{% block content_before_login %}
 	<center><h3>You are not in an account !<br />Please <a href="/login/">log in</a> to make your quizzes for your class !</h3></center>
 {% endblock %}
 
-{% block content_1 %}
-<div class = "contaner">
-	<div class ="span7 offset2">
-		<div class = "row-fluid" align = "center">
-			<form class = "well form-horizontal" action = "." method = "post" align = "center">
-            {% csrf_token %}
-			  <legend><b>Make new Quizz </b></legend>
-               	<style type="text/css">
-					.errorlist li {
-						font-size: 12px;
-						color: red;
-						display: block;
-					}
-				</style>
-				<table class = "table">
-                    {{form.as_table}}
-                    
-                    <p style = "color: red; "> {{state}} </p>
-                </table>
-					<button type = "submit" class = "btn btn-primary" value = "Submit">Create</button>
-					<button type = "reset" class = "btn btn-danger" value = "Reset" >Reset fields</button> </br></br>
-			</form>
-		</div>	
+{% block content_after_login %}
+	<div class = "contaner">
+		<div class ="span7 offset2">
+			<div class = "row-fluid" align = "center">
+				<form class = "well form-horizontal" action = "." method = "post" align = "center">
+				{% csrf_token %}
+				  <legend><b>Make new Quizz </b></legend>
+					<style type="text/css">
+						.errorlist li {
+							font-size: 12px;
+							color: red;
+							display: block;
+						}
+					</style>
+					<table class = "table">
+						{{form.as_table}}
+						
+						<p style = "color: red; "> {{state}} </p>
+					</table>
+						<button type = "submit" class = "btn btn-primary" value = "Submit">Create</button>
+						<button type = "reset" class = "btn btn-danger" value = "Reset" >Reset fields</button> </br></br>
+				</form>
+			</div>	
+		</div>
 	</div>
-</div>
 {% endblock %}

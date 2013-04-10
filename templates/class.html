@@ -1,17 +1,18 @@
 {% extends "base.html" %}
-{% block title %} {{Classes_list.class_name}} {% endblock %}
+<!-- Title-->
+{% block title %} {{Classes.class_name}} {% endblock %}
 
-
-{% block content %}
+<!--body-->
+{% block content_before_login %}
     <center><h3>Sorry! You are not in account<br />Please <a href="/login/">log in </a> or <a href="register"> create new account </a>to use this page .</h3></center>
 {% endblock %}
 
-{% block content_1 %}
+{% block content_after_login %}
 <!-- Forms
 ================================================== -->
 <section id="forms">
     <div class="page-header">
-    	<font color="#66CC99"><h1>{{Classes_list.class_name}}</h1></font>
+    	<font color="#66CC99"><h1>{{Classes.class_name}}</h1></font>
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
@@ -22,59 +23,143 @@
                         <tr>
                             <td width="106">Teacher's Name</td>
                             <td width="10">:</td>
-                            <td width="171">{{Classes_list.teacher_name}}</td>
+                            <td width="171">{{Classes.teacher_name}}</td>
                         </tr>
                         <tr>
                             <td>No. Students</td>
                             <td>:</td>
-                            <td>{{Classes_list.number_students}} Students</td>
+                            <td>{{Classes.number_students}} Students</td>
                         </tr>
                         <tr>
                             <td>Account of Teacher</td>
                             <td>:</td>
-                            <td><a href="#">{{Classes_list.user.username}}</a></td>
+                            <td><a href="#">{{Classes.user.username}}</a></td>
                         </tr>
                     </table>
-                    {% if User = Classes_list.user %}
-                    	<center><a href="/edit_class/{{Classes_list.id}}/" class="btn btn-info" align="right"><i class = "icon icon-repeat"></i> Change information</a></center>
+					
+                    {% if User = Classes.user %}
+                    
+                    	<center>
+                        <a href="/edit_class/{{Classes.id}}/" class="btn btn-info" align="right"><i class = "icon icon-repeat"></i> Change information</a><br /><br />
+                        <select name="add_students">
+                        	<option value="">---User to adding---</option>
+                        	{% for User in list_user %}
+                                <option value="{{User.id}}">{{User.username}}</option>
+                            {% endfor %}
+                        </select> 
+                        &nbsp;
+                        <button type="submit" class="btn btn-success"><i class="icon icon-plus"></i> Add</button>
+                        </center>
+                        
+                    {% else %}
+                    	{% if User in list_students %}
+							<center>
+								<button type="submit" name="students_delete" class="btn btn-danger" value="{{User.username}}"}><i class="icon icon-share"></i> Out class</button>
+							</center>
+                    	{% endif %}
+                    {% endif %}
+					
+                </form>
+				
+			
+            {% if User = Classes.user %}
+            
+            	<font color="#0033FF"><h2>Students Manage</h2></font>
+                <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
+				
+                	{% if length != 0 %}
+                    
+                        <table class="table table-condensed " >
+                            <thead>
+                                <tr>
+                                    <th width="100">Students</th>
+                                    <th width="15">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                            {% for User in list_students %}
+                            <tr>
+                                <td><a href="#">{{User.username}}</a></td>
+                                <td align="right"><input type="checkbox" name="students_delete" value="{{User.username}}" /></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <center><button type="submit" class="btn btn-success">Submit</button></center>
+                    {% else %}
+                    	<center><font color="#FF0000">Class has not students</font></center>
+                    {% endif %}
+					
+                </form>
+                
+            {% else %}
+            	<font color="#0033FF"><h2>Students</h2></font>
+                <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
+				
+                	{% if length != 0 %}
+                    
+                        <table class="table table-condensed " >
+                            <thead>
+                                <tr>
+                                    <th width="100">Students</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for User in list_students %}
+                            <tr>
+                                <td><a href="/member/{{User.id}}-{{User.username}}/">{{User.username}}</a></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                    	<center><font color="#FF0000">Class has not students</font></center>
                     {% endif %}
                 </form>
-            </div>
-            <div class="span8">
-                <font color="#0033FF"><h2>Quizzes</h2></font>
-                    <form class = "well form-horizontal" action = "." method = "post" align = "center"> {% csrf_token %}
-                    	<table class="table table-striped table-bordered">
-                       		<tr class="focused">
+            {% endif %}
+			
+        </div>
+        <div class="span8">
+            <font color="#0033FF"><h2>Quizzes</h2></font>
+                <form class = "well form-horizontal" action = "." method = "post" align = "center"> {% csrf_token %}
+                    <table class="table table-striped table-bordered">
+                        <tr class="focused">
+                            <td>
+                                <h4 align="center">Quizzes Title</h4>
+                            </td>
+                            <td>
+                                <h4 align="center">Number of Questions</h4>
+                            </td>
+                            <td>
+                                <h4 align="center">Time limited</h4>
+                            </td>
+                        </tr>
+                        {% for Quizzes in Quizzes_list %}
+                            <tr >
                                 <td>
-                                    <h4 align="center">Quizzes Title</h4>
+                                    <a href="/quizzes/{{Quizzes.id}}/">{{Quizzes.title}}</a>
                                 </td>
                                 <td>
-                                    <h4 align="center">Number of Questions</h4>
+                                    <center>{{Quizzes.number_questions}} questions </center>
                                 </td>
                                 <td>
-                                    <h4 align="center">Time limited</h4>
+                                    <center>{{Quizzes.time_limit}} minutes</center>
                                 </td>
                             </tr>
-                    		{% for Quizzes in Quizzes_list %}
-                            	<tr >
-                                	<td>
-                        				<a href="/quizzes/{{Quizzes.id}}/">{{Quizzes.Title}}</a>
-                                    </td>
-                                    <td>
-                                    	<center>{{Quizzes.Number_questions}} questions </center>
-                                    </td>
-                                    <td>
-                                    	<center>{{Quizzes.Time_limit}} minutes</center>
-                                    </td>
-                                </tr>
-                        	{% endfor %}
-                        </table>
-                        
-                        {% if User = Classes_list.user %}
-                            <br />
-                            <center><a href="/create_quizz/{{Classes_list.id}}/" class="btn btn-success" align="right"><i class = "icon icon-plus"></i> Create new Quizzes</a></center>
-                        {% endif %}
-                    </form>
+                        {% endfor %}
+                    </table>
+                    {% if User not in list_students and User != Classes.user %}
+                    	<center>
+                        	<font color="#FF0000">You are not student of this class !Please send request to teacher if you want become a students of this class !</font>
+                        </center>
+                    {% endif %}
+					
+                    {% if User = Classes.user %}
+                        <br />
+                        <center><a href="/create_quizz/{{Classes.id}}/" class="btn btn-success" align="right"><i class = "icon icon-plus"></i> Create new Quizzes</a></center>
+                    {% endif %}
+                </form>
               <p>&nbsp;</p>
             </div>
         </div>

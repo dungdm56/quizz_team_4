@@ -1,37 +1,35 @@
 {% extends "base.html" %}
+
+<!--Title-->
 {% block title %} Register {% endblock %}
 
-{% block slide %} {% endblock %}
-{% block page_header %}  {% endblock %}
-
-{% block content_1 %}
-	<center><h3>Sorry ! You are logged in an account : {{User.username}}<br />Please <a href="/logout/">Log out</a> to create an new account</h3></center>
+<!--body-->
+{% block content_after_login %}
+	<center><h3>Sorry ! You are in an account : {{User.username}}<br />Please <a href="/logout/">Log out</a> to create an new account</h3></center>
     <br /><br /><br />
 {% endblock %}
 
-{% block content %} 
-    <div class = "">
-            <div class = "well span6 offset2">
-                <form class = "register form-actions" method = "post" action = "." align = "center">
-                {% csrf_token %}
-                    <legend>Create new account</legend>
-                    <style type="text/css">
-                        .errorlist li {
-                            font-size: 12px;
-                            color: red;
-                            display: block;
-                        }
-                    </style>
-                    <table class="well table controls">
-                        {{ form.as_table }}
-                    </table>
-                    <br />
-                    <center>
-                    <button class = "btn btn-primary" type = "submit" value = "Submit" name = "Submit">Register</button>
-                    <button class = "btn btn-danger" type = "reset" value = "Reset" name = "Reset">Reset</button>
-                    </center>
-                </form>
-            </div>
-    </div>
+{% block content_before_login %}
+	<div class = "well span6 offset2">
+		<form class = "focused register form-actions" method = "post" action = "." align = "center">
+			{% csrf_token %}
+			<legend>Create new account</legend>
+			<style type="text/css">
+				.errorlist li {
+					font-size: 12px;
+					color: red;
+					display: block;
+				}
+			</style>
+			<table class="well table controls">
+				{{ form.as_table }}
+			</table>
+			<br />
+			<center>
+			<button class = "btn btn-primary" type = "submit" value = "Submit" name = "Submit">Register</button>
+			<button class = "btn btn-danger" type = "reset" value = "Reset" name = "Reset">Reset</button>
+			</center>
+		</form>
+	</div>
 {% endblock %}
 

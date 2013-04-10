@@ -1,8 +1,10 @@
 {% extends "base.html" %}
+
+<!--Title-->
 {% block title %} Home page {% endblock %}
 
-
-{% block content %}
+<!--body-->
+{% block content_before_login %}
     <div class = "span4 well">
         <center ><h1 class = "page-header" style = "color: green;">Wellcome to <br />Team4 Quiz Management  <img src = "/static/images/smily/03_vvv.gif"></img></h1></center>
 		<p>If you have an account. <a href = "/login/">Login</a> now</p>
@@ -15,7 +17,7 @@
                 <div id="myElement">Loading the player...</div>
 				<script type="text/javascript">
 					jwplayer("myElement").setup({
-						file: "http://www.youtube.com/watch?v=h4lyacIlxoI",
+						file: "http://www.youtube.com/watch?v=j3s7JaLs0e8",
 					});
 				</script>
             </div>
@@ -23,53 +25,99 @@
     </div>
 {% endblock %}
 
-{% block content_1 %}
+{% block content_after_login %}
+
 	<div class="span3">
         <div class="well">
         	<center>
-                <a href="#"><img src="../static/images/account.png" width="128" height="128" longdesc="../static/images/account.png" /></a><br />
-                <a href="#"><h2>{{ User.username }}</h2></a>
+                <a href="/member/{{User.id}}-{{User.username}}"><img src="../static/images/account.png" width="128" height="128" longdesc="../static/images/account.png" /></a><br />
+                <a href="/member/{{User.id}}-{{User.username}}"><h2>{{ User.username }}</h2></a>
             </center>
         </div>
+        <h3><font color="#0033FF">Information</font></h3>
+		
+        <div class="well" >
+            <table class="table table-striped" >
+			    <tr>
+                    <td><b>Full name</b></td>
+                    <td>:</td>
+                    <td style="word-wrap:break-word;"><font size="1">{{User.first_name}} {{User.last_name}}</font></td>
+                </tr>
+                <tr>
+                    <td><b>Email</b></td>
+                    <td>:</td>
+                    <td style="word-wrap:break-word;"><font size="1">{{User.email}}</font></td>
+                </tr>
+            </table>
+        </div>
     </div>
+	
     <div class="span8">
     	<div class="well">
-        	<h3>List of classes created by this account</h3>
+        	<h3><font color="#009933">List of classes created by this account</font></h3>
             <br />
-            	<table class="table table-striped" >
-                	<tr class="focused">
-                		<td><h4>Class name</h4></td>
-                        <td><h4>Time Created</h4></td>
-                        <td><h4>Date Created</h4></td>
-                    </tr>
-            	{% for Classes in Classes_list %}
-                	<tr>
-                		<td><a href="/class/{{Classes.id}}" >{{Classes.class_name}}</a></td>
-                        <td>{{Classes.Update_time}}</td>
-                        <td>{{Classes.Update_date}}</td>
-                    </tr>
-                {% endfor %}
-                </table>
+			<table class="table table-striped" >
+				<tr class="focused">
+					<td width= '250'><h4>Class name</h4></td>
+					<td width= '150'><h4>Time Created</h4></td>
+					<td width= '150'><h4>Date Created</h4></td>
+				</tr>
+				
+			{% for Classes in classes_list %}
+				<tr>
+					<td><a href="/class/{{Classes.id}}" >{{Classes.class_name}}</a></td>
+					<td>{{Classes.update_time}}</td>
+					<td>{{Classes.update_date}}</td>
+				</tr>
+			{% endfor %}
+			
+			</table>
             <br />
             <br />
-            <h3>Another classes</h3>
+			
+			<h3><font color="#009933">Classes Joined</font></h3>
             <br />
                 <table class="table table-striped" >
                 	<tr class="focused">
-                		<td><h4>Class name</h4></td>
-                        <td><h4>Time Created</h4></td>
-                        <td><h4>Date Created</h4></td>
+                		<td width= '250'><h4>Class name</h4></td>
+                        <td width= '150'><h4>Time Created</h4></td>
+                        <td width= '150'><h4>Date Created</h4></td>
                     </tr>
-            	{% for Classes in Classes_list2 %}
-                	<tr>
-                        <td><a href="/class/{{Classes.id}}" >{{Classes.class_name}}</a><br />
-                        <font size="1">Created by <a href="#">{{Classes.user.username}}</a></font>
-                        </td>
-                        <td>{{Classes.Update_time}}</td>
-                        <td>{{Classes.Update_date}}</td>
-                    </tr>
-                {% endfor %}
+					
+					{% for Classes in classes_list_joined %}
+						<tr>
+							<td><a href="/class/{{Classes.id}}" >{{Classes.class_name}}</a><br />
+							<font size="1">Created by <a href="#">{{Classes.user.username}}</a></font>
+							</td>
+							<td>{{Classes.update_time}}</td>
+							<td>{{Classes.update_date}}</td>
+						</tr>
+					{% endfor %}
+					
                 </table>
+            <br />
+			
+            <h3><font color="#009933">Another classes</font></h3>
+            <br />
+			<table class="table table-striped" >
+				<tr class="focused">
+					<td width= '250'><h4>Class name</h4></td>
+					<td width= '150'><h4>Time Created</h4></td>
+					<td width= '150'><h4>Date Created</h4></td>
+				</tr>
+				{% for Classes in classes_list_another%}
+					{% if Classes not in classes_list and Classes not in classes_list_joined %}
+						<tr>
+							<td><a href="/class/{{Classes.id}}" >{{Classes.class_name}}</a><br />
+							<font size="1">Created by <a href="#">{{Classes.user.username}}</a></font>
+							</td>
+							<td>{{Classes.update_time}}</td>
+							<td>{{Classes.update_date}}</td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+			</table>
+			
             <br />
         </div>
     </div>

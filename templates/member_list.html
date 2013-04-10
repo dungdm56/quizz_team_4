@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+<!--Title-->
+{% block title %} Home page {% endblock %}
+
+<!--body-->
+{% block content_before_login %}
+	<div class="span3">
+        <div class="well">
+        	<center>
+                <form class = "well focused">
+                    <fieldset class = "error">
+                        <legend><font color="#009933"><h1>Welcome</h1></font></legend>
+                            <h3>User account</h3>
+                            <p><a href = "/login/">Login</a></p>
+                            <p><a href = "/register/">Regsiter</a></p>
+                    </fieldset>
+                </form>
+            </center>
+        </div>
+    </div>
+    <div class="span8">
+    	<div class="well">
+        	<h3><font color="#009933">Member list</font></h3>
+            <br />
+            	<table class="table table-striped" >
+                	<tr class="focused">
+                		<td><h4>Username</h4></td>
+                        <td><h4>Fullname</h4></td>
+                        <td><h4>Email</h4></td>
+                    </tr>
+            	{% for member in member_list %}
+                	<tr>
+                		<td><a href="/member/{{member.id}}-{{member.username}}" >{{member.username}}</a></td>
+                        <td>{{member.first_name}} {{member.last_name}}</td>
+                        <td>{{member.email}}</td>
+                    </tr>
+                {% endfor %}
+                </table>
+            <br />
+        </div>
+    </div>
+{% endblock %}
+
+{% block content_after_login %}
+
+    <div class="span11" align="center">
+    	<div class="well">
+        	<h3>Member list</h3>
+            <br />
+            	<table class="table table-striped" >
+                	<tr class="focused">
+                		<td><h4>Username</h4></td>
+                        <td><h4>Fullname</h4></td>
+                        <td><h4>Email</h4></td>
+                    </tr>
+            	{% for member in member_list %}
+                	<tr>
+                		<td><a href="/member/{{member.id}}-{{member.username}}" >{{member.username}}</a></td>
+                        <td>{{member.first_name}} {{member.last_name}}</td>
+                        <td>{{member.email}}</td>
+                    </tr>
+                {% endfor %}
+                </table>
+            <br />
+        </div>
+    </div>
+	
+{% endblock %}

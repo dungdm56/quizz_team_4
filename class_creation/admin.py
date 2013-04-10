@@ -14,28 +14,28 @@ class ClassesAdmin(admin.ModelAdmin):
                 ('Number Students', {'fields': ['number_students']}),
                 ('Teacher',{'fields': ['teacher_name']}),
                 ('User created',{'fields': ['user']}),
-                ('Time Create',{'fields': ['Update_time']}),
-                ('Date Create',{'fields': ['Update_date']})]
+                ('Time Create',{'fields': ['update_time']}),
+                ('Date Create',{'fields': ['update_date']})]
     inlines= [QuizzesInline]
     list_display=('class_name', 'teacher_name','user')
     
 class QuizzesAdmin(admin.ModelAdmin):
-    fieldsets= [('Class', {'fields': ['Class']}),
-                ('Title', {'fields': ['Title']}),
-                ('Time limit (minutes)',{'fields': ['Time_limit']}),
-                ('Time Update',{'fields': ['Update_time']}),
-                ('Date Create',{'fields': ['Update_date']})]
-    list_display=('Title', 'Update_time')
+    fieldsets= [('Class', {'fields': ['in_class']}),
+                ('Title', {'fields': ['title']}),
+                ('Time limit (minutes)',{'fields': ['time_limit']}),
+                ('Time Update',{'fields': ['update_time']}),
+                ('Date Create',{'fields': ['update_date']})]
+    list_display=('title', 'update_time')
     
 class QuestionsAdmin(admin.ModelAdmin):
     fieldsets= [('In Quizzes', {'fields': ['quizz']}),
-                ('Question', {'fields': ['Ques']}),
-                ('Answer 1',{'fields': ['Ans1']}),
-                ('Answer 2',{'fields': ['Ans2']}),
-                ('Answer 3',{'fields': ['Ans3']}),
-                ('Answer 4',{'fields': ['Ans4']}),
-                ('Answer correct',{'fields': ['Correct_ans']})]
-    list_display=('Ques', 'quizz')
+                ('Question', {'fields': ['ques']}),
+                ('Answer 1',{'fields': ['ans1']}),
+                ('Answer 2',{'fields': ['ans2']}),
+                ('Answer 3',{'fields': ['ans3']}),
+                ('Answer 4',{'fields': ['ans4']}),
+                ('Answer correct',{'fields': ['correct_ans']})]
+    list_display=('ques', 'quizz')
     
 # Register your models here.
 #===============================================================================

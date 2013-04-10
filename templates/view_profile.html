@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+<!--Title-->
+{% block title %} Profile {% endblock %}
+
+<!--body-->
+{% block content_before_login %}
+	<div class="span3">
+        <div class="well">
+        	<center>
+                <form class = "well focused">
+                    <fieldset class = "error">
+                        <legend> <h1>Welcome</h1></legend>
+                            <h3>User account</h3>
+                            <p><a href = "/login/">Login</a></p>
+                            <p><a href = "/register/">Regsiter</a></p>
+                    </fieldset>
+                </form>
+            </center>
+        </div>
+    </div>
+    
+    <div class="span8">
+   	  <div class="well">
+        	<center>
+            	<p><img src="/static/images/ban.gif" width="137" height="137"  /></p><br />
+            	<p><font color="#FF0000" size="3" >You are not member of this website !So you can not see information of this member !</font></p>
+          </center>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content_after_login %}
+	<div class="span3">
+    	<h1>&nbsp;</h1>
+        <div class="well">
+        	<center>
+                <a href="/member/{{member.id}}-{{member.username}}"><img src="../../static/images/account.png" width="128" height="128" longdesc="../../static/images/account.png" /></a><br />
+                <a href="/member/{{member.id}}-{{member.username}}"><h2>{{ member.username }}</h2></a>
+            </center>
+        </div>
+    </div>
+    
+    <div class="span5">
+        <font color="#0033FF"><h2>Profile</h2></font>
+		<form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
+			<table class="table table-condensed " >
+				<tr>
+					<td width="106"><h5>Username</h5></td>
+					<td width="10">:</td>
+					<td width="171">{{member.username}}</td>
+				</tr>
+				<tr>
+					<td><h5>Real name</h5></td>
+					<td>:</td>
+					<td>{{member.first_name}} {{member.last_name}}</td>
+				</tr>
+				<tr>
+					<td><h5>Email</h5></td>
+					<td>:</td>
+					<td>{{member.email}}</td>
+				 </tr>
+				 <tr>
+					<td><h5>Date Joined</h5></td>
+					<td>:</td>
+					<td>{{member.date_joined}}</td>
+				 </tr>
+				 <tr>
+					<td><h5>Last login</h5></td>
+					<td>:</td>
+					<td>{{member.last_login}}</td>
+				 </tr>
+			</table>
+			{% if User = member %}
+				<center><a href="/member/edit_my_profile/" class="btn btn-info" align="right"><i class = "icon icon-repeat"></i> Edit profile</a></center>
+			{% endif %}
+		</form>
+	</div>
+    
+    <div class="span3">
+    	<font color="#0033FF"><h2>Classes</h2></font>
+        <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
+			<table class="table table-striped " >
+				<thead>
+                    <th>Class name</th>
+				</thead>
+                <tbody>
+                	{% for Classes in Classes_list %}
+                        <tr>
+                            <td><a href="/class/{{Classes.id}}/">{{Classes.class_name}}</a></td>
+                        </tr>
+                    {% endfor %}
+				</tbody>
+			</table>
+			{% if User = member %}
+				<center><a href="/create_class/" class="btn btn-success" align="right"><i class = "icon icon-plus"></i> New class</a></center>
+			{% endif %}
+		</form>
+    </div>
+{% endblock %}

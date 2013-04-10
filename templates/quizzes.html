@@ -1,121 +1,146 @@
 {% extends "base.html" %}
-{% block title %} {{Quizzes.Title}} {% endblock %}
 
+<!--Title-->
+{% block title %} {{Quizzes.title}} {% endblock %}
 
-{% block content %}
+<!--body-->
+{% block content_before_login %}
     <center><h3>Sorry! You are not in account<br />Please <a href="/login/">log in </a> or <a href="register"> create new account </a>to use this page .</h3></center>
 {% endblock %}
 
-{% block content_1 %}
 <!-- Forms
 ================================================== -->
-<section id="forms">
-    <div class="page-header">
-    	<font color="#66CC99"><h1>{{Quizzes.Title}}</h1></font>
-    </div>
-    <div class="container-fluid">
-        <div class="row-fluid">
-          <div class="span4">
-            <font color="#0033FF"><h2>Information</h2></font>
-                <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
-                    <table class="table table-condensed " >
-                        <tr>
-                            <td width="106">Title</td>
-                            <td width="10">:</td>
-                            <td width="171">{{Quizzes.Title}}</td>
-                        </tr>
-                        <tr>
-                            <td>Time limit</td>
-                            <td>:</td>
-                            <td>{{Quizzes.Time_limit}} minutes</td>
-                        </tr>
-                        <tr>
-                            <td>Date create</td>
-                            <td>:</td>
-                            <td>{{Quizzes.Update_time}} {{Quizzes.Update_date}}</td>
-                        </tr>
-                        <tr>
-                            <td>Class</td>
-                            <td>:</td>
-                            <td><a href="/class/{{Quizzes.Class.id}}/">{{Quizzes.Class.class_name}}</a></td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-            
-            {% if User = Quizzes.Class.user %}
-            
-                <div class="span8">
-                    <font color="#0033FF"><h2>Questions</h2></font>
-                        <form class = "well form-horizontal" action = "." method = "post" align = "center"> {% csrf_token %}
-                            <table class="table table-bordered">
-                            	<thead>
-                                    <tr>
-                                        <th><center>Question</center></th>
-                                        <th><center>Correct</center></th>
-                                        <th><center>Answers</center></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {% for Questions in Questions_list %}
-                                	<tr>
-                                        <td rowspan="4">{{Questions.Ques}}</td>
-                                        <td><center>{% if Questions.Correct_ans = 1 %}<i class="icon icon-ok"></i>{% endif %}</center></td>
-                                        <td>{{Questions.Ans1}}</td>
-                                    </tr>
-                                    <tr>
-                                    	<td><center>{% if Questions.Correct_ans = 2 %}<i class="icon icon-ok"></i>{% endif %}</center></td>
-                                    	<td>{{Questions.Ans2}}</td>
-                                    </tr>
-                                    <tr>
-                                    	<td><center>{% if Questions.Correct_ans = 3 %}<i class="icon icon-ok"></i>{% endif %}</center></td>
-                                    	<td>{{Questions.Ans3}}</td>
-                                    </tr>
-                                    <tr>
-                                    	<td><center>{% if Questions.Correct_ans = 4 %}<i class="icon icon-ok"></i>{% endif %}</center></td>
-                                    	<td>{{Questions.Ans4}}</td>
-                                    </tr>
-                            	{% endfor %}
-                                 </tbody>
-                            </table>
-                            
-                            <br />
-                            <center><a href="/create_questions/{{Quizzes.id}}/" class="btn btn-success" align="right"><i class = "icon icon-plus"></i> Create new Question</a></center>
-                           
-                        </form>
-                  <p>&nbsp;</p>
-                </div>
-            
-            {% else %}
-            	{% if Quizzes.Number_questions != 0 %}
-                    <div class="span8">
-                        <font color="#0033FF"><h2>Ready</h2></font>
-                        
-                        <form class = "well form-horizontal" action = "." method = "post" align = "center"> {% csrf_token %}
-                            <center >
-                                <font color="#00CC66"><h3>Press "Start" to start doing this quizzes</h3></font><br />
-                                Please don't refresh page while doing question !<br /><br />
-                                <a href="/doing_quizz/{{Quizzes.id}}/" class="btn btn-info btn-large"><i class="icon icon-play-circle"></i> Start</a> <br /><br />
-                                <font face="Helvetica" size="1" color="#FF0033">*Note : You should have a good preparing before press Start.<br /> Because we will start time of this Quizzes when you press Start. Thank you ! </font>
-                            </center>
-                        </form>
-                    </div>
-                 {% else %}
-                 	<div class="span8">
-                        <font color="#0033FF"><h2>Sorry</h2></font>
-                        <form class = "well form-horizontal" action = "." method = "post" align = "center"> {% csrf_token %}
-                        	<center>
-                            	<img src="/static/images/ban.gif" alt="--Sorry--" width="192" height="192"  />
-                                <br /><br /><br /><font size="3" color="#FF0000"><b>Sorry! This Quizz don't have any questions to you can do !<br />
-                                Please visit page after teacher of this class update questions! Thanks you.</b></font>
-                          </center>
-                       	</form>
-                    </div>
-                 {% endif %}
-            
-            {% endif %}
-            
-        </div>
-    </div>
+{% block content_after_login %}
+	<section id="forms">
+		<div class="page-header">
+			<font color="#66CC99"><h1>{{Quizzes.title}}</h1></font>
+		</div>
+		<div class="container-fluid">
+			<div class="row-fluid">
+			  <div class="span4">
+				<font color="#0033FF"><h2>Information</h2></font>
+					<form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
+						<table class="table table-condensed " >
+							<tr>
+								<td width="106">Title</td>
+								<td width="10">:</td>
+								<td width="171">{{Quizzes.title}}</td>
+							</tr>
+							<tr>
+								<td>Time limit</td>
+								<td>:</td>
+								<td>{{Quizzes.time_limit}} minutes</td>
+							</tr>
+							<tr>
+								<td>Date create</td>
+								<td>:</td>
+								<td>{{Quizzes.update_time}} {{Quizzes.update_date}}</td>
+							</tr>
+							<tr>
+								<td>Class</td>
+								<td>:</td>
+								<td><a href="/class/{{Quizzes.in_class.id}}/">{{Quizzes.in_class.class_name}}</a></td>
+							</tr>
+						</table>
+						{% if User = Quizzes.in_class.user %}
+                    	<center><a href="/edit_quizz/{{Quizzes.id}}/" class="btn btn-info" align="right"><i class = "icon icon-repeat"></i> Change information</a></center>
+						{% endif %}
+					</form>
+				</div>
+				
+				{% if User = Quizzes.in_class.user %}
+				
+					<div class="span8">
+						<font color="#0033FF"><h2>Questions</h2></font>
+							<form class = "well form-horizontal" action = "." method = "post" align = "center"> {% csrf_token %}
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th><center>Question</center></th>
+											<th><center>Correct</center></th>
+											<th><center>Answers</center></th>
+											<th><center>Option</center></th>
+										</tr>
+									</thead>
+									<tbody>
+									{% for Questions in questions_list %}
+										<tr>
+											<td rowspan="4">{{Questions.ques}}</td>
+											<td><center>{% if Questions.correct_ans = 1 %}<i class="icon icon-ok"></i>{% endif %}</center></td>
+											<td>{{Questions.ans1}}</td>
+											<td rowspan ="4">
+												<a class="btn btn-info" align="right" href="/edit_question/{{Questions.id}}/" >Edit</a>
+												<a href="#myModal{{Questions.id}}" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+													<div id="myModal{{Questions.id}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+														<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><b>-</b></button>
+														<h3 id="myModalLabel" align="cennter">WARNING!</h3>
+														</div>
+														<div class="modal-body">
+														<p>Are you sure to delete this question?</p>
+														</div>
+														<div class="modal-footer">
+														<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
+														
+														<a class="btn btn-danger" align="right" href="/delete_question/{{Questions.id}}/" >Yes</a>
+														</div>
+													</div>
+										</td>
+										</tr>
+										<tr>
+											<td><center>{% if Questions.correct_ans = 2 %}<i class="icon icon-ok"></i>{% endif %}</center></td>
+											<td>{{Questions.ans2}}</td>
+										</tr>
+										<tr>
+											<td><center>{% if Questions.correct_ans = 3 %}<i class="icon icon-ok"></i>{% endif %}</center></td>
+											<td>{{Questions.ans3}}</td>
+										</tr>
+										<tr>
+											<td><center>{% if Questions.correct_ans = 4 %}<i class="icon icon-ok"></i>{% endif %}</center></td>
+											<td>{{Questions.ans4}}</td>
+										</tr>
+									{% endfor %}
+									 </tbody>
+								</table>
+								
+								<br />
+								<center><a href="/create_questions/{{Quizzes.id}}/" class="btn btn-success" align="right"><i class = "icon icon-plus"></i> Create new Question</a></center>
+							   
+							</form>
+					  <p>&nbsp;</p>
+					</div>
+				
+				{% else %}
+					{% if Quizzes.number_questions != 0 %}
+						<div class="span8">
+							<font color="#0033FF"><h2>Ready</h2></font>
+							
+							<form class = "well form-horizontal" action = "." method = "post" align = "center"> {% csrf_token %}
+								<center >
+									<font color="#00CC66"><h3>Press "Start" to start doing this quizzes</h3></font><br />
+									Please don't refresh page while doing question !<br /><br />
+									<a href="/doing_quizz/{{Quizzes.id}}/" class="btn btn-info btn-large"><i class="icon icon-play-circle"></i> Start</a> <br /><br />
+									<font face="Helvetica" size="1" color="#FF0033">*Note : You should have a good preparing before press Start.<br /> Because we will start time of this Quizzes when you press Start. Thank you ! </font>
+								</center>
+							</form>
+						</div>
+					 {% else %}
+						<div class="span8">
+							<font color="#0033FF"><h2>Sorry</h2></font>
+							<form class = "well form-horizontal" action = "." method = "post" align = "center"> {% csrf_token %}
+								<center>
+									<img src="/static/images/ban.gif" alt="--Sorry--" width="192" height="192"  />
+									<br /><br /><br /><font size="3" color="#FF0000"><b>Sorry! This Quizz don't have any questions to you can do !<br />
+									Please visit page after teacher of this class update questions! Thanks you.</b></font>
+							  </center>
+							</form>
+						</div>
+					 {% endif %}
+				
+				{% endif %}
+				
+			</div>
+		</div>
+	</section>
 {% endblock %}
 

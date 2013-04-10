@@ -6,9 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase, Client
-from models import *
-import unittest
-from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 
 class TestUser(TestCase):
     #fixtures = ['accounts_views_testdata.json']
@@ -80,4 +78,5 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'failure', 0)
         self.assertContains(response, 'Successfully', 1)
-        
+
+

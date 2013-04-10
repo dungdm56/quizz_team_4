@@ -1,65 +1,69 @@
 {% extends "base.html" %}
-{% block title %} Edit {{Classes_list.class_name}} {% endblock %}
 
+<!--Title-->
+{% block title %} Edit {{Classes.class_name}} {% endblock %}
 
-{% block content %}
+<!--body-->
+{% block content_before_login %}
     <center><h3>Sorry! You are not in account<br />Please <a href="/login/">log in </a> or <a href="register"> create new account </a>to use this page .</h3></center>
 {% endblock %}
 
-{% block content_1 %}
+
 <!-- Forms
 ================================================== -->
-<section id="forms">
-    <div class="page-header" align="center">
-    	<font color="#66CC99"><h1>{{Classes_list.class_name}}</h1></font>
-    </div>
-    
-    {% if User = Classes_list.user %}
-    
-    <div class="container">
-    	<div class ="span7 offset2">
-			<div class = "row-fluid" align = "center">
-				<form class = "well form-horizontal focused" action = "." method = "post" align = "center"> {% csrf_token %}
-                	<legend><b><font color="#FF9966">Changing informations of class {{Classes_list.class_name}}</font></b></legend>
-                    <style type="text/css">
-						.errorlist li {
-							font-size: 12px;
-							color: red;
-							display: block;
-						}
-					</style>
-                    <table class="table table-condensed " align="center" >
-                    	<tr>
-                            <td><label for="id_class_name"><h5>Class's Name</h5></label></td>
-                            <td>:</td>
-                            <td><input type="text" id="id_class_name" name="class_name" value="{{Classes_list.class_name}}" /></td>
-                        </tr>
-                        <tr>
-                            <td><label for="id_number_students"><h5>No. Students</h5></label></td>
-                            <td>:</td>
-                            <td><input type="number" id="id_number_students" name="number_students" value="{{Classes_list.number_students}}" /></td>
-                        </tr>
-                        <tr>
-                            <td><label for="id_teacher_name"><h5>Teacher's Name</h5></label></td>
-                            <td>:</td>
-                            <td><input type="text" id="id_teacher_name" name="teacher_name" value="{{Classes_list.teacher_name}}" /></td>
-                        </tr>
-                        
-                        <tr>
-                            <td><h5>Account of Teacher</h5></td>
-                            <td>:</td>
-                            <td><font color="#0033FF">{{Classes_list.user.username}}</font></td>
-                        </tr>
-                    </table>
-                    <button type="submit" class="btn btn-success"><i class="icon icon-ok"></i> Change</button>
-                    <a href="/class/{{Classes_list.id}}/"><button type="button" class="btn btn-warning"><i class="icon icon-remove-sign"></i> Cancel</button></a>
-                    
-                </form>
-            </div>
-        </div>
-    </div>
-    {% else %}
-    	<center><h4>You don't have permirsion to change data of this class!</h4></center>
-    {% endif %}
+{% block content_after_login %}
+	<section id="forms">
+		<div class="page-header" align="center">
+			<font color="#66CC99"><h1>{{Classes.class_name}}</h1></font>
+		</div>
+		
+		{% if User = Classes.user %}
+		
+		<div class="container">
+			<div class ="span7 offset2">
+				<div class = "row-fluid" align = "center">
+					<form class = "well form-horizontal focused" action = "." method = "post" align = "center"> {% csrf_token %}
+						<legend><b><font color="#FF9966">Changing informations of class {{Classes.class_name}}</font></b></legend>
+						<style type="text/css">
+							.errorlist li {
+								font-size: 12px;
+								color: red;
+								display: block;
+							}
+						</style>
+						<table class="table table-condensed " align="center" >
+							<tr>
+								<td><label for="id_class_name"><h5>Class's Name</h5></label></td>
+								<td>:</td>
+								<td><input type="text" id="id_class_name" name="class_name" value="{{Classes.class_name}}" /></td>
+							</tr>
+							<tr>
+								<td><label for="id_number_students"><h5>No. Students</h5></label></td>
+								<td>:</td>
+								<td><input type="number" id="id_number_students" name="number_students" value="{{Classes.number_students}}" /></td>
+							</tr>
+							<tr>
+								<td><label for="id_teacher_name"><h5>Teacher's Name</h5></label></td>
+								<td>:</td>
+								<td><input type="text" id="id_teacher_name" name="teacher_name" value="{{Classes.teacher_name}}" /></td>
+							</tr>
+							
+							<tr>
+								<td><h5>Account of Teacher</h5></td>
+								<td>:</td>
+								<td><font color="#0033FF">{{Classes.user.username}}</font></td>
+							</tr>
+						</table>
+						<button type="submit" class="btn btn-success"><i class="icon icon-ok"></i> Change</button>
+						<a href="/class/{{Classes.id}}/"><button type="button" class="btn btn-warning"><i class="icon icon-remove-sign"></i> Cancel</button></a>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+		{% else %}
+			<center><h4>You don't have permirsion to change data of this class!</h4></center>
+		{% endif %}
+	</section>
 {% endblock %}
 

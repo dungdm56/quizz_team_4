@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+<!--Title-->
+{% block title %} Edit {{Classes_list.class_name}} {% endblock %}
+
+<!--body-->
+{% block content_before_login %}
+    <center><h3>Sorry! You are not in account<br />Please <a href="/login/">log in </a> or <a href="register"> create new account </a>to use this page .</h3></center>
+{% endblock %}
+
+
+<!-- Forms
+================================================== -->
+{% block content_after_login %}
+	<section id="forms">
+		<div class="page-header" align="center">
+			<font color="#66CC99"><h1>{{user.username}}</h1></font>
+		</div>
+		
+		<div class="container">
+			<div class ="span7 offset2">
+				<div class = "row-fluid" align = "center">
+					<form class = "well form-horizontal focused" action = "." method = "post" align = "center"> {% csrf_token %}
+						<legend><b><font color="#FF9966">Changing profile {{user.username}}</font></b></legend>
+						<style type="text/css">
+							.errorlist li {
+								font-size: 12px;
+								color: red;
+								display: block;
+							}
+						</style>
+						<table class="table table-condensed " align="center" >
+							{{ form.as_table }}
+						</table>
+						<button type="submit" class="btn btn-success"><i class="icon icon-ok"></i> Change</button>
+						<button type="button" class="btn btn-warning"><i class="icon icon-remove-sign"></i><a href="/user/{{user.id}}-{{user.username}}/">Cancel</a></button> 
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+

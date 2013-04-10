@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+<!--Title-->
+{% block title %} Edit {{Quizz.title}} {% endblock %}
+
+<!--body-->
+{% block content_before_login %}
+    <center><h3>Sorry! You are not in account<br />Please <a href="/login/">log in </a> or <a href="register"> create new account </a>to use this page .</h3></center>
+{% endblock %}
+
+{% block content_after_login %}
+<!-- Forms
+================================================== -->
+<section id="forms">
+    <div class="page-header" align="center">
+    	<font color="#66CC99"><h1>{{Quizz.title}}</h1></font>
+    </div>
+    
+    {% if User = Classes.user %}
+    
+    <div class="container">
+    	<div class ="span7 offset2">
+			<div class = "row-fluid" align = "center">
+				<form class = "well form-horizontal focused" action = "." method = "post" align = "center"> {% csrf_token %}
+                	<legend><b><font color="#FF9966">Changing informations of quizz {{Quizz.title}}</font></b></legend>
+                    <style type="text/css">
+						.errorlist li {
+							font-size: 12px;
+							color: red;
+							display: block;
+						}
+					</style>
+                    <table class="table table-condensed " align="center" >
+                    	<tr>
+                            <td><label for="id_class_name"><h5>Title</h5></label></td>
+                            <td>:</td>
+                            <td><input type="text" id="id_title" name="title" value="{{Quizz.title}}" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="id_number_students"><h5>Time_limit (mins)</h5></label></td>
+                            <td>:</td>
+                            <td><input type="number" id="id_time_limit" name="time_limit" value="{{Quizz.time_limit}}" /></td>
+                        </tr>
+                       
+                    </table>
+                    <button type="submit" class="btn btn-success"><i class="icon icon-ok"></i> Change</button>
+                    <a href="/class/{{Classes.id}}/"><button type="button" class="btn btn-warning"><i class="icon icon-remove-sign"></i> Cancel</button></a>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    	<center><h4>You don't have permirsion to change data of this quizz!</h4></center>
+    {% endif %}
+{% endblock %}
+

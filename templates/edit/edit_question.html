@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+<!--Title-->
+{% block title %}Edit Question{% endblock %}
+
+<!--body-->
+{% block content_before_login %}
+	<center><h3>You are currently not logged in! <br />Please <a href="/login/">log in</a> to create your questions !</h3></center>
+{% endblock %}
+
+{% block content_after_login %}
+<div class = "container">
+	<div class ="span7 offset2">
+		<div class = "row-fluid" align = "center">
+			<form class = "well form-horizontal focused" action = "." method = "post" align = "center">
+            {% csrf_token %}
+			  <legend><b>Edit question in <a href="/quizzes/{{Quizzes.id}}/">{{Quizzes.title}} Quizzes</a></b></legend>
+               	<style type="text/css">
+					.errorlist li {
+						font-size: 12px;
+						color: red;
+						display: block;
+					}
+				</style>
+				<table class = "table">
+                	<tr>
+                    	<td>
+                        	<h5>Question</h5>
+                        </td>
+                    	<td>:</td>
+                        <td>
+                        	<textarea class="input-xlarge" rows = "2.5" type="text" name="ques" id="ques" >{{Question.ques}}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<h5>Answer 1</h5>
+                        </td>
+                    	<td>:</td>
+                        <td>
+                        	<textarea class="input-xlarge" rows = "1.5" type="text" name="ans1" id="id_ans1" >{{Question.ans1}}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<h5>Answer 2</h5>
+                        </td>
+                    	<td>:</td>
+                        <td>
+                        	
+                        	<textarea class="input-xlarge" rows = "1.5" type="text" name="ans2" id="ans2" >{{Question.ans2}}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<h5>Answer 3</h5>
+                        </td>
+                    	<td>:</td>
+                        <td>
+                        	<textarea class="input-xlarge" rows = "1.5" type="text" name="ans3" id="ans3">{{Question.ans3}}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<h5>Answer 4</h5>
+                        </td>
+                    	<td>:</td>
+                        <td>
+                        	<textarea class="input-xlarge" rows = "1.5" type="text" name="ans4" id="ans4">{{Question.ans4}}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<h5>The correct answer</h5>
+                        </td>
+                    	<td>:</td>
+                        <td>
+                        	<select id="correct_ans" name="correct_ans">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select> 
+                        </td>
+                    </tr>
+                    <p style = "color: red; "> {{state}} </p>
+                </table>
+					<button type = "submit" class = "btn btn-primary" value = "Submit">Submit</button>
+					<button type = "reset" class = "btn btn-danger" value = "Reset" >Reset fields</button> </br></br>
+			</form>
+		</div>	
+	</div>
+</div>
+{% endblock %}
