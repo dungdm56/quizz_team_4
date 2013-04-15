@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 <!-- Title-->
-{% block title %} {{Classes.class_name}} {% endblock %}
+{% block title %} {{Class.class_name}} {% endblock %}
 
 <!--body-->
 {% block content_before_login %}
@@ -12,7 +12,7 @@
 ================================================== -->
 <section id="forms">
     <div class="page-header">
-    	<font color="#66CC99"><h1>{{Classes.class_name}}</h1></font>
+    	<font color="#66CC99"><h1>{{Class.class_name}}</h1></font>
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
@@ -23,24 +23,24 @@
                         <tr>
                             <td width="106">Teacher's Name</td>
                             <td width="10">:</td>
-                            <td width="171">{{Classes.teacher_name}}</td>
+                            <td width="171">{{Class.teacher_name}}</td>
                         </tr>
                         <tr>
                             <td>No. Students</td>
                             <td>:</td>
-                            <td>{{Classes.number_students}} Students</td>
+                            <td>{{Class.number_students}} Students</td>
                         </tr>
                         <tr>
                             <td>Account of Teacher</td>
                             <td>:</td>
-                            <td><a href="/member/{{Classes.user.id}}-{{Classes.user.username}}/">{{Classes.user.username}}</a></td>
+                            <td><a href="/member/{{Class.user.id}}-{{Class.user.username}}/">{{Class.user.username}}</a></td>
                         </tr>
                     </table>
 					
-                    {% if User = Classes.user %}
+                    {% if User = Class.user %}
                     
                     	<center>
-                        <a href="/edit_class/{{Classes.id}}/" class="btn btn-info" align="right"><i class = "icon icon-repeat"></i> Change information</a><br /><br />
+                        <a href="/edit_class/{{Class.id}}/" class="btn btn-info" align="right"><i class = "icon icon-repeat"></i> Change information</a><br /><br />
                         <select name="add_students">
                         	<option value="">---User to adding---</option>
                         	{% for User in list_user %}
@@ -62,7 +62,7 @@
                 </form>
 				
 			
-            {% if User = Classes.user %}
+            {% if User = Class.user %}
             
             	<font color="#0033FF"><h2>Students Manage</h2></font>
                 <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
@@ -80,7 +80,7 @@
                             
                             {% for User in list_students %}
                             <tr>
-                                <td><a href="#">{{User.username}}</a></td>
+                                <td><a href="/member/{{User.id}}-{{User.username}}/">{{User.username}}</a></td>
                                 <td align="right"><input type="checkbox" name="students_delete" value="{{User.username}}" /></td>
                             </tr>
                             {% endfor %}
@@ -149,15 +149,15 @@
                             </tr>
                         {% endfor %}
                     </table>
-                    {% if User not in list_students and User != Classes.user %}
+                    {% if User not in list_students and User != Class.user %}
                     	<center>
                         	<font color="#FF0000">You are not student of this class !Please send request to teacher if you want become a students of this class !</font>
                         </center>
                     {% endif %}
 					
-                    {% if User = Classes.user %}
+                    {% if User = Class.user %}
                         <br />
-                        <center><a href="/create_quizz/{{Classes.id}}/" class="btn btn-success" align="right"><i class = "icon icon-plus"></i> Create new Quizzes</a></center>
+                        <center><a href="/create_quizz/{{Class.id}}/" class="btn btn-success" align="right"><i class = "icon icon-plus"></i> Create new Quizzes</a></center>
                     {% endif %}
                 </form>
               <p>&nbsp;</p>

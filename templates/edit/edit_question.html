@@ -14,7 +14,7 @@
 		<div class = "row-fluid" align = "center">
 			<form class = "well form-horizontal focused" action = "." method = "post" align = "center">
             {% csrf_token %}
-			  <legend><b>Edit question in <a href="/quizzes/{{Quizzes.id}}/">{{Quizzes.title}} Quizzes</a></b></legend>
+			  <legend><b>Edit question in <a href="/quizzes/{{Quizzes.id}}/">{{Quizz.title}} Quizzes</a></b></legend>
                	<style type="text/css">
 					.errorlist li {
 						font-size: 12px;
@@ -85,8 +85,8 @@
                     </tr>
                     <p style = "color: red; "> {{state}} </p>
                 </table>
-					<button type = "submit" class = "btn btn-primary" value = "Submit">Submit</button>
-					<button type = "reset" class = "btn btn-danger" value = "Reset" >Reset fields</button> </br></br>
+					<button type="submit" class="btn btn-success"><i class="icon icon-ok"></i> Change</button>
+					<a href="/quizzes/{{Quizz.id}}" class="btn btn-warning"><i class="icon icon-remove-sign"></i> Cancel</a> </br></br>
 			</form>
 		</div>	
 	</div>

@@ -39,7 +39,7 @@
           <div class="span4">
             <font color="#0033FF"><h2>Information</h2></font>
                 <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
-                    <table class="table table-condensed " >
+                    <table class="table table-condensed" >
                         <tr>
                             <td width="106"><h5>Start time</h5></td>
                             <td width="10">:</td>
@@ -106,9 +106,9 @@
             
             <div class="span8">
                 <font color="#0033FF"><h2>Quizzes</h2></font>
-                    <form class = "well form-horizontal" action = "." method = "post" name="answer" align = "center"> {% csrf_token %}
+                    <form class = "well form-horizontal" action = "." method = "post" name="answer" align = "left"> {% csrf_token %}
                         {% for Questions in questions_list %}
-                        	<h5>{{Questions.ques}}</h5><br />
+                        	<h5><em>Question</em> : {{Questions.ques}}</h5><br />
                             <label class="radio">
                                 <input type="radio" name="Answer{{Questions.id}}" id="Answer1" value="1"><font color="#6633CC">A.</font> {{Questions.ans1}}
                             </label>

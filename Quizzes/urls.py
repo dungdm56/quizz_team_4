@@ -1,12 +1,9 @@
 from django.conf.urls import patterns, include, url
-from django.core.context_processors import csrf
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-from django.utils.archive import Archive
 admin.autodiscover()
 
-from django.conf import settings
 import os
 
 static = os.path.join(
@@ -16,9 +13,10 @@ image = os.path.join(
     os.path.dirname(__file__), 'image'
 )
 
-from accounts.views import login_user, logout, home, signup, about, signup_success
-from class_creation.views import *
-from Quizzes.views import home
+from accounts.views import login_user, logout, signup, about, signup_success
+from Class.views import create_class, create_class_success, classes, edit_class
+from Quizz.views import *
+from Quizzes.views  import home
 
 urlpatterns = patterns('',
     # Examples:

@@ -12,7 +12,7 @@ from django.contrib.auth import login
 from django.core.context_processors import csrf
 from django.template import Context, loader, RequestContext
 from django.template.loader import get_template
-from class_creation.models import Classes
+from Class.models import Classes
 
 from django.views.decorators.csrf import csrf_protect
 

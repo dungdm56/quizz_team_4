@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 <!--Title-->
-{% block title %} Edit {{Classes.class_name}} {% endblock %}
+{% block title %} Edit {{Class.class_name}} {% endblock %}
 
 <!--body-->
 {% block content_before_login %}
@@ -14,16 +14,16 @@
 {% block content_after_login %}
 	<section id="forms">
 		<div class="page-header" align="center">
-			<font color="#66CC99"><h1>{{Classes.class_name}}</h1></font>
+			<font color="#66CC99"><h1>{{Class.class_name}}</h1></font>
 		</div>
 		
-		{% if User = Classes.user %}
+		{% if User = Class.user %}
 		
 		<div class="container">
 			<div class ="span7 offset2">
 				<div class = "row-fluid" align = "center">
 					<form class = "well form-horizontal focused" action = "." method = "post" align = "center"> {% csrf_token %}
-						<legend><b><font color="#FF9966">Changing informations of class {{Classes.class_name}}</font></b></legend>
+						<legend><b><font color="#FF9966">Changing informations of class {{Class.class_name}}</font></b></legend>
 						<style type="text/css">
 							.errorlist li {
 								font-size: 12px;
@@ -35,27 +35,27 @@
 							<tr>
 								<td><label for="id_class_name"><h5>Class's Name</h5></label></td>
 								<td>:</td>
-								<td><input type="text" id="id_class_name" name="class_name" value="{{Classes.class_name}}" /></td>
+								<td><input type="text" id="id_class_name" name="class_name" value="{{Class.class_name}}" /></td>
 							</tr>
 							<tr>
 								<td><label for="id_number_students"><h5>No. Students</h5></label></td>
 								<td>:</td>
-								<td><input type="number" id="id_number_students" name="number_students" value="{{Classes.number_students}}" /></td>
+								<td><input type="number" id="id_number_students" name="number_students" value="{{Class.number_students}}" /></td>
 							</tr>
 							<tr>
 								<td><label for="id_teacher_name"><h5>Teacher's Name</h5></label></td>
 								<td>:</td>
-								<td><input type="text" id="id_teacher_name" name="teacher_name" value="{{Classes.teacher_name}}" /></td>
+								<td><input type="text" id="id_teacher_name" name="teacher_name" value="{{Class.teacher_name}}" /></td>
 							</tr>
 							
 							<tr>
 								<td><h5>Account of Teacher</h5></td>
 								<td>:</td>
-								<td><font color="#0033FF">{{Classes.user.username}}</font></td>
+								<td><font color="#0033FF">{{Class.user.username}}</font></td>
 							</tr>
 						</table>
 						<button type="submit" class="btn btn-success"><i class="icon icon-ok"></i> Change</button>
-						<a href="/class/{{Classes.id}}/"><button type="button" class="btn btn-warning"><i class="icon icon-remove-sign"></i> Cancel</button></a>
+						<a href="/class/{{Class.id}}/"><button type="button" class="btn btn-warning"><i class="icon icon-remove-sign"></i> Cancel</button></a>
 						
 					</form>
 				</div>

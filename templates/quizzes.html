@@ -56,10 +56,10 @@
 								<table class="table table-bordered">
 									<thead>
 										<tr>
-											<th><center>Question</center></th>
-											<th><center>Correct</center></th>
-											<th><center>Answers</center></th>
-											<th><center>Option</center></th>
+											<th width="348"><center>Question</center></th>
+											<th width="169"><center>Correct</center></th>
+											<th width="275"><center>Answers</center></th>
+											<th width="279"><center>Option</center></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -68,12 +68,12 @@
 											<td rowspan="4">{{Questions.ques}}</td>
 											<td><center>{% if Questions.correct_ans = 1 %}<i class="icon icon-ok"></i>{% endif %}</center></td>
 											<td>{{Questions.ans1}}</td>
-											<td rowspan ="4">
+											<td rowspan ="4"> <center>
 												<a class="btn btn-info" align="right" href="/edit_question/{{Questions.id}}/" >Edit</a>
 												<a href="#myModal{{Questions.id}}" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
 													<div id="myModal{{Questions.id}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 														<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><b>-</b></button>
+														<button type="button" class="close" data-dismiss="modal" aria-hidden="true">Hide</button>
 														<h3 id="myModalLabel" align="cennter">WARNING!</h3>
 														</div>
 														<div class="modal-body">
@@ -85,7 +85,7 @@
 														<a class="btn btn-danger" align="right" href="/delete_question/{{Questions.id}}/" >Yes</a>
 														</div>
 													</div>
-										</td>
+											</center></td>
 										</tr>
 										<tr>
 											<td><center>{% if Questions.correct_ans = 2 %}<i class="icon icon-ok"></i>{% endif %}</center></td>

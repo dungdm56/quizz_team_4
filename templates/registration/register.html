@@ -5,13 +5,13 @@
 
 <!--body-->
 {% block content_after_login %}
-	<center><h3>Sorry ! You are in an account : {{User.username}}<br />Please <a href="/logout/">Log out</a> to create an new account</h3></center>
+	<center><h3>Sorry ! You are logged in an account : {{User.username}}<br />Please <a href="/logout/">Log out</a> to create an new account</h3></center>
     <br /><br /><br />
 {% endblock %}
 
 {% block content_before_login %}
 	<div class = "well span6 offset2">
-		<form class = "focused register form-actions" method = "post" action = "." align = "center">
+		<form class = "register form-actions" method = "post" action = "." align = "center">
 			{% csrf_token %}
 			<legend>Create new account</legend>
 			<style type="text/css">
