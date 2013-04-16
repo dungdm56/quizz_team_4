@@ -9,6 +9,7 @@ class QuizzesInline(admin.TabularInline):
     model= Quizzes
     extra= 3
 #===============================================================================
+#class manage data in admin page
 class ClassesAdmin(admin.ModelAdmin):
     fieldsets= [('Class name', {'fields': ['class_name']}),
                 ('Number Students', {'fields': ['number_students']}),
@@ -37,12 +38,9 @@ class QuestionsAdmin(admin.ModelAdmin):
                 ('Answer correct',{'fields': ['correct_ans']})]
     list_display=('ques', 'quizz')
     
-# Register your models here.
+# Register models
 #===============================================================================
 admin.site.register(Classes, ClassesAdmin)
-#===============================================================================
 admin.site.register(Quizzes,QuizzesAdmin)
-#===============================================================================
 admin.site.register(Questions, QuestionsAdmin)
 #===============================================================================
-#admin.site.register(Classes)
