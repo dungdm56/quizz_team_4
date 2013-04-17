@@ -90,7 +90,7 @@ class EditProfileForm(forms.ModelForm):
 	#the Meta class to define the Model for this form and order of label  appear
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'new_password', 'conf_password', 'current_password')
+        fields = ('first_name', 'last_name', 'email', 'new_password', 'confirm_password', 'current_password')
     
 	#the definition to check if the current password is correct or not
     def clean_current_password(self):

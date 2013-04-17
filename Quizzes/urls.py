@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 	#home
     url(r'^$', home),
-	url(r'^home/$', home),
+    url(r'^home/$', home),
 	
 	#account
     url(r'^login/$', login_user),
@@ -47,16 +47,16 @@ urlpatterns = patterns('',
     url(r'^create_quizz/([^\s]+)/$', create_quizz),
     url(r'^quizzes/([^\s]+)/$', quizzes),
     url(r'^doing_quizz/([^\s]+)/$', doing_quizz),
-	url(r'^edit_quizz/([^\s]+)/$', edit_quizz),
+    url(r'^edit_quizz/([^\s]+)/$', edit_quizz),
 	
 	#question and result
     url(r'^create_questions/([^\s]+)/$', create_question),
-	url(r'^edit_question/([^\s]+)/$', edit_question),
-	url(r'^delete_question/([^\s]+)/$', delete_question),
+    url(r'^edit_question/([^\s]+)/$', edit_question),
+    url(r'^delete_question/([^\s]+)/$', delete_question),
     url(r'^result/([^\s]+)/([^\s]+)/([^\s]+)/([^\s]+)/$', result),
     url(r'^answer/([^\s]+)/$', answer),
 	
-	(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve',
          { 'document_root': static }),
 
     (r'^image/(?P<path>.*)$', 'django.views.static.serve',

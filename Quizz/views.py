@@ -48,7 +48,7 @@ def edit_quizz(request,id_quizz):
             return HttpResponseRedirect('/quizzes/'+str(quizz.id)+'/')	# Return to quizz page.
         
         # For the situation that quizz title is changed.
-		if quizz_form.is_valid():								
+        if quizz_form.is_valid():								
             quizz.title= request.POST.get('title')					# Get update title for this quizz.
             quizz.time_limit= request.POST.get('time_limit')		# Get update limited time for this quizz.
             quizz.save()											# Save changes of this quizz.
