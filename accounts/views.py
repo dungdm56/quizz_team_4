@@ -13,67 +13,91 @@ from django.contrib.auth.models import User
 
 @csrf_protect
 
+#the definiton for signup method
 def signup(request):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
+        form = RegistrationForm(request.POST)				#get form from request in web page
+		
+		#check if the form is valid or not
         if form.is_valid():
+			#create new user with this data from form
             user = User.objects.create_user(
                 username=form.cleaned_data['username'],
                 password=form.cleaned_data['password'],
                 email=form.cleaned_data['email'],
             )
-            user.save()
+            user.save()			#save user
             return HttpResponseRedirect('/signup_success/')
     else:
-        form = RegistrationForm()
-    # return render(request,'steps_count/index.html',{'top_list': top_list})
+        form = RegistrationForm()							#get form from models.py for web page
+	#return a file html and some context for this file	
     return render_to_response('registration/register.html', context_instance=RequestContext(request, {'form' : form, 'User': request.user}))
 
+#the definition for login method
 def login_user(request):
+	#get data for variable
     username = request.POST.get('username')
     password = request.POST.get('password')
     state = ''
+	
+	#check if the method of request is POST or not
     if request.POST:
-        user = auth.authenticate(username=username, password=password)
+        user = auth.authenticate(username=username, password=password)		#use a virtual user variable to check
+		
+		#check if the user is valid to login or not
         if user is not None and user.is_active:
-            login(request, user)
+            login(request, user)											#user method login of Python
             state = "You are successfully login"
-            return HttpResponseRedirect('/home/')
+            return HttpResponseRedirect('/home/')							#return home page when user login successful
         else:
             state = 'Sorry, that is not a valid name and or password'
+			#return login page againt if the information is invalid
             return render_to_response('registration/login.html', {'state':state}, context_instance=RequestContext(request, { 'User': request.user}))
     else:
+		#return login page if the method of request is not POST
         return render_to_response('registration/login.html', {'state':state}, context_instance=RequestContext(request, { 'User': request.user}))
 
+#the definition for logout method
 def logout(request):
-    auth.logout(request)
+    auth.logout(request)						#user logout method of Python
     return HttpResponseRedirect('/')
 
+#the definition for home method
 def home(request):
-    return render_to_response('home.html', context_instance=RequestContext(request, { 'User': request.user}))
+    return render_to_response('home.html', context_instance=RequestContext(request, { 'User': request.user}))	#return home.html and some context
 
+#the definition for about method
 def about(request):
-    return render_to_response('about.html', context_instance=RequestContext(request, { 'User': request.user}))
+    return render_to_response('about.html', context_instance=RequestContext(request, { 'User': request.user}))	#return about.html and some context
+	
+#the definition for signup_success method
 def signup_success(request):
-    return render_to_response('signup_success.html', context_instance=RequestContext(request, { 'User': request.user}))
+    return render_to_response('signup_success.html', context_instance=RequestContext(request, { 'User': request.user}))	#return signup_success.html and some context
 
+#the definition for member_list method
 def member_list(request):
     return render_to_response('member_list.html',
-        context_instance=RequestContext(request, {'User': request.user, 'member_list': User.objects.all()}))
+        context_instance=RequestContext(request, {'User': request.user, 'member_list': User.objects.all()}))		#return member_list.html and some context
 
+#the definition for view_profile method
 def view_profile(request, member_id, member_username):
+	#get some variable for context of web page
     member = get_object_or_404(User, id=member_id, username=member_username)
     classes_list = Classes.objects.filter(user = member)
+	
     return render_to_response('view_profile.html',
-        context_instance=RequestContext(request, {'User': request.user, 'member': member,'Classes_list':classes_list}))
+        context_instance=RequestContext(request, {'User': request.user, 'member': member,'Classes_list':classes_list}))		#return view_profile.html and some context
 
+#the definition for edit_profile method
 def edit_profile(request):
-    if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user)
+    if request.method == 'POST':						#check if the method of request is POST or not
+        form = EditProfileForm(request.POST, instance=request.user)  #get form from request
+		
+		#check the form is valid or not
         if form.is_valid():
-            form.save_data()
+            form.save_data()							#save data from form
             return HttpResponseRedirect('/member/%s-%s/' % (request.user.id, request.user.username))
     else:
-        form = EditProfileForm(instance=request.user)
+        form = EditProfileForm(instance=request.user)	#get form for webpage
     return render_to_response('edit/edit_profile.html',
-            context_instance=RequestContext(request, {'User': request.user, 'form': form}))
+            context_instance=RequestContext(request, {'User': request.user, 'form': form}))		#return edit profile page and some context
