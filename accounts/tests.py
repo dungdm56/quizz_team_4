@@ -46,12 +46,10 @@ class TestViews(TestCase):
         )
         self.user.save()
         self.client = Client()
-    
     #Test home page
     def test_home_page(self):
         resp = self.client.get('/home/')
         self.assertEqual(resp.status_code, 200)
-    
     #Test if a user is register successfully
     def test_signup(self):
         response = self.client.get('/register/')
@@ -72,7 +70,6 @@ class TestViews(TestCase):
         self.client.login(username = 'admin', password = 'admin')
         is_logged_out = self.client.logout()
         self.assertEqual(is_logged_out, None)
-    
     #Test page
     def test_about_page(self):
         response = self.client.get('/about/')

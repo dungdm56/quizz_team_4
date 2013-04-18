@@ -44,9 +44,7 @@
                         <select name="add_students">
                         	<option value="">---User to adding---</option>
                         	{% for User in list_user %}
-								{% if User not in list_students %}
-									<option value="{{User.id}}">{{User.username}}</option>
-								{% endif %}
+                                <option value="{{User.id}}">{{User.username}}</option>
                             {% endfor %}
                         </select> 
                         &nbsp;

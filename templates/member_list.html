@@ -28,12 +28,16 @@
                 		<td><h4>Username</h4></td>
                         <td><h4>Fullname</h4></td>
                         <td><h4>Email</h4></td>
+						<td><h4>Joined Date</h4></td>
+						<td><h4>Last login</h4></td>
                     </tr>
             	{% for member in member_list %}
                 	<tr>
                 		<td><a href="/member/{{member.id}}-{{member.username}}" >{{member.username}}</a></td>
                         <td>{{member.first_name}} {{member.last_name}}</td>
                         <td>{{member.email}}</td>
+						<td>{{member.date_joined}}</td>
+						<td>{{member.last_login}}</td>
                     </tr>
                 {% endfor %}
                 </table>
@@ -53,12 +57,16 @@
                 		<td><h4>Username</h4></td>
                         <td><h4>Fullname</h4></td>
                         <td><h4>Email</h4></td>
+						<td><h4>Joined Date</h4></td>
+						<td><h4>Last login</h4></td>
                     </tr>
             	{% for member in member_list %}
                 	<tr>
                 		<td><a href="/member/{{member.id}}-{{member.username}}" >{{member.username}}</a></td>
                         <td>{{member.first_name}} {{member.last_name}}</td>
                         <td>{{member.email}}</td>
+						<td>{{member.date_joined}}</td>
+						<td>{{member.last_login}}</td>
                     </tr>
                 {% endfor %}
                 </table>
