@@ -46,11 +46,13 @@ class TestViews(TestCase):
         )
         self.user.save()
         self.client = Client()
-        
+    
+    #Test home page
     def test_home_page(self):
         resp = self.client.get('/home/')
         self.assertEqual(resp.status_code, 200)
-        
+    
+    #Test if a user is register successfully
     def test_signup(self):
         response = self.client.get('/register/')
         self.assertEqual(response.status_code, 200)
@@ -60,19 +62,23 @@ class TestViews(TestCase):
         response = self.client.post('/register/', {'username': 'abc', 'password' : 'abc', 'email': 'abc@gmail.com'})
         self.assertEqual(response.status_code, 200)
     
+    #Test whether or not a user is logged successfully
     def test_login_user(self):
         is_logged_in = self.client.login(username = 'admin', password = 'admin')
         self.assertEqual(is_logged_in, True)
     
+    #Test if a user is logout successfully
     def test_logout(self):
         self.client.login(username = 'admin', password = 'admin')
         is_logged_out = self.client.logout()
         self.assertEqual(is_logged_out, None)
-        
+    
+    #Test page
     def test_about_page(self):
         response = self.client.get('/about/')
         self.assertEqual(response.status_code, 200)
         
+    #Test status of a success user
     def test_signup_success(self):
         response = self.client.get('/signup_success/')
         self.assertEqual(response.status_code, 200)
