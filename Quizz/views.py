@@ -17,6 +17,7 @@ def create_quizz(request,id_class):
     
     if request.method == 'POST':
         form = MakeQuizzForm(request.POST)
+		
         if form.is_valid():												# Make sure that form is valid.
             quizz = Quizzes.objects.create(								# Create new quizz.
                 in_class = in_class,									# Set class of new quizz.
@@ -148,13 +149,16 @@ def doing_quizz(request,id_quizz):
     students = quizz.in_class.students.all()					# List all students of class of this quizz.
     
     if request.POST:
-        leng = len(questions_list)
-        mark = leng
-        empty = 0
+	    #make some variable to calculate result
+        leng = len(questions_list)			#the number of question
+        mark = leng							#the mark after finish
+        empty = 0							#the number of empty question after finish
         
+		#calculate result
         for Question in questions_list:
             answer = 'Answer'+str(Question.id)
             
+			#check if the question have answer or not
             if request.POST.get(answer) is not None:
                 if not str(Question.correct_ans) == str(request.POST.get(answer)):
                     mark = mark - 1
@@ -168,22 +172,24 @@ def doing_quizz(request,id_quizz):
     
 #============the return when you completed quizz=================================
 def result(request,id_quizz,name_user,val_mark,val_empty):
-    quizz = get_object_or_404(Quizzes,id = id_quizz)
-    questions_list = Questions.objects.filter(quizz = quizz)
-    leng = len(questions_list)
-    mark = int(val_mark)
-    empty = int(val_empty)
-    wrong = leng - mark - empty
-    percent = int(((float(int(float(mark)/float(leng)*100)))/100) *100)
+	#some variable for context in web page
+    quizz = get_object_or_404(Quizzes,id = id_quizz)						
+    questions_list = Questions.objects.filter(quizz = quizz)				#get all questions of this quizz
+    leng = len(questions_list)												#get number of questions
+    mark = int(val_mark)													#get mark for test
+    empty = int(val_empty)													#get empty question students have not done
+    wrong = leng - mark - empty												#get the number of wrong answer
+    percent = int(((float(int(float(mark)/float(leng)*100)))/100) *100)		#get the percent of correct answer
     
     return render_to_response('result.html',context_instance=RequestContext(request,{ 'User': request.user,'Quizzes':quizz,'mark':mark,'leng':leng,'empty':empty,'wrong':wrong,'percent':percent}))
 
 
 #===========the return when you want to see answer of any class===================
 def answer(request,id_quizz):
-    quizz = get_object_or_404(Quizzes,id = id_quizz)
-    questions_list = Questions.objects.filter(quizz = quizz)
-    students = quizz.in_class.students.all()
+	#some variable for context in web page
+    quizz = get_object_or_404(Quizzes,id = id_quizz)						
+    questions_list = Questions.objects.filter(quizz = quizz)				#get all questions of this quizz
+    students = quizz.in_class.students.all()								#get all students in this class
     
     return render_to_response('answer.html',context_instance=RequestContext(request,{ 'User': request.user,'Quizzes':quizz,'questions_list':questions_list,'list_students':students}))
 
