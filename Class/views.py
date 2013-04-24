@@ -91,9 +91,12 @@ def classes(request, id_class):
 #=======when you want to edit your class================================
 def edit_class(request, id_class):
     _class = get_object_or_404(Classes, id=id_class)
+    state = ''
+
     #method for searching
     if request.GET.has_key('search'):
         return search(request)
+
     if request.POST:
         # check if the class_name be changed or not
         if not _class.class_name == request.POST.get('class_name'):
@@ -102,15 +105,20 @@ def edit_class(request, id_class):
             class_form = EditClassInformationForm(request.POST)
         # check information after edit are valid or not
         if class_form.is_valid():
-            _class.user = request.user
-            _class.class_name = request.POST.get('class_name')
-            _class.number_students = request.POST.get('number_students')
-            _class.teacher_name = request.POST.get('teacher_name')
-            _class.save()
-            link = '/class/' + str(_class.id) + '/'
-            return HttpResponseRedirect(link)
+            if int(request.POST.get('number_students')) >= _class.students.all().count():
+                _class.user = request.user
+                _class.class_name = request.POST.get('class_name')
+                _class.number_students = request.POST.get('number_students')
+                _class.teacher_name = request.POST.get('teacher_name')
+                _class.save()
+                link = '/class/' + str(_class.id) + '/'
+                return HttpResponseRedirect(link)
+            else:
+                state = 'The number of students in class at the moment is larger than the number you enter'
+    
     variables = RequestContext(request, {
         'User': request.user,
-        'Class': _class
+        'Class': _class,
+        'state': state
     })
     return render_to_response('edit/edit_class.html', variables)

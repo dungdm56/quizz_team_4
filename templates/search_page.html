@@ -16,10 +16,13 @@
 					{% if user_search.count = 0 %}
 						<font color="#FF3300"><em>No result</em></font>
 					{% else %}
-						{% for User in user_search %}
-							<strong><a href="/member/{{User.id}}-{{User.username}}/">{{User.username}}</a></strong>
-							<br />
-						{% endfor %}
+                    	<table class="table">
+                            {% for User in user_search %}
+                            <tr>
+                                <td><strong><a href="/member/{{User.id}}-{{User.username}}/">{{User.username}}</a></strong></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
 					{% endif %}
 					<br /><br />
 				</div>
@@ -27,10 +30,13 @@
 					{% if class_search.count = 0 %}
 						<font color="#FF3300"><em>No result</em></font>
 					{% else %}
-						{% for Class in class_search %}
-							<strong><a href="/class/{{Class.id}}/">{{Class.class_name}}</a></strong>
-							<br />
-						{% endfor %}
+                    	<table class="table">
+                            {% for Class in class_search %}
+                            <tr>
+                                <td><strong><a href="/class/{{Class.id}}/">{{Class.class_name}}</a></strong></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
 					{% endif %}
 					<br /><br />
 				</div>
@@ -38,10 +44,13 @@
 					{% if quizz_search.count = 0 %}
 						<font color="#FF3300"><em>No result</em></font>
 					{% else %}
-						{% for Quizz in quizz_search %}
-							<strong><a href="/quizzes/{{Quizz.id}}/">{{Quizz.title}}</a></strong>
-							<br />
-						{% endfor %}
+                    	<table class="table">
+                            {% for Quizz in quizz_search %}
+                            <tr>
+                                <td><strong><a href="/quizzes/{{Quizz.id}}/">{{Quizz.title}}</a></strong></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
 					{% endif %}
 					<br /><br />
 				</div>
@@ -70,10 +79,13 @@
 					{% if user_search.count = 0 %}
 						<font color="#FF3300"><em>No result</em></font>
 					{% else %}
-						{% for User in user_search %}
-							<strong><a href="/member/{{User.id}}-{{User.username}}/">{{User.username}}</a></strong>
-							<br />
-						{% endfor %}
+                    	<table class="table">
+                            {% for User in user_search %}
+                            <tr>
+                                <td><strong><a href="/member/{{User.id}}-{{User.username}}/">{{User.username}}</a></strong></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
 					{% endif %}
 					<br /><br />
 				</div>
@@ -81,10 +93,13 @@
 					{% if class_search.count = 0 %}
 						<font color="#FF3300"><em>No result</em></font>
 					{% else %}
-						{% for Class in class_search %}
-							<strong><a href="/class/{{Class.id}}/">{{Class.class_name}}</a></strong>
-							<br />
-						{% endfor %}
+                    	<table class="table">
+                            {% for Class in class_search %}
+                            <tr>
+                                <td><strong><a href="/class/{{Class.id}}/">{{Class.class_name}}</a></strong></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
 					{% endif %}
 					<br /><br />
 				</div>
@@ -92,10 +107,13 @@
 					{% if quizz_search.count = 0 %}
 						<font color="#FF3300"><em>No result</em></font>
 					{% else %}
-						{% for Quizz in quizz_search %}
-							<strong><a href="/quizzes/{{Quizz.id}}/">{{Quizz.title}}</a></strong>
-							<br />
-						{% endfor %}
+                    	<table class="table">
+                            {% for Quizz in quizz_search %}
+                            <tr>
+                                <td><strong><a href="/quizzes/{{Quizz.id}}/">{{Quizz.title}}</a></strong></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
 					{% endif %}
 					<br /><br />
 				</div>

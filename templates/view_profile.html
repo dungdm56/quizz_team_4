@@ -80,21 +80,30 @@
     <div class="span3">
     	<font color="#0033FF"><h2>Classes</h2></font>
         <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
-			<table class="table table-striped " >
-				<thead>
-                    <th>Class name</th>
-				</thead>
-                <tbody>
-                	{% for Classes in Classes_list %}
-                        <tr>
-                            <td><a href="/class/{{Classes.id}}/">{{Classes.class_name}}</a></td>
-                        </tr>
-                    {% endfor %}
-				</tbody>
-			</table>
-			{% if User = member %}
-				<center><a href="/create_class/" class="btn btn-success" align="right"><i class = "icon icon-plus"></i> New class</a></center>
-			{% endif %}
+        	{% if Classes_list.count != 0 %}
+                <table class="table table-striped " >
+                    <thead>
+                        <th>Class name</th>
+                    </thead>
+                    <tbody>
+                        {% for Classes in Classes_list %}
+                            <tr>
+                                <td><a href="/class/{{Classes.id}}/">{{Classes.class_name}}</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+                {% if User = member %}
+                    <center><a href="/create_class/" class="btn btn-success" align="right"><i class = "icon icon-plus"></i> New class</a></center>
+                {% endif %}
+            {% else %}
+            	{% if User = member %}
+            		<center><em><font color="#FF0000">You don't have any class</font></em></center><br />
+                {% else %}
+                	<center><em><font color="#FF0000">This member doesn't have any class</font></em></center><br />
+                {% endif %}
+            {% endif %}
 		</form>
     </div>
 {% endblock %}

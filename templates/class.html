@@ -31,6 +31,11 @@
                             <td>{{Class.number_students}} Students</td>
                         </tr>
                         <tr>
+                            <td>No. Students Current</td>
+                            <td>:</td>
+                            <td>{{list_students.count}} Students</td>
+                        </tr>
+                        <tr>
                             <td>Account of Teacher</td>
                             <td>:</td>
                             <td><a href="/member/{{Class.user.id}}-{{Class.user.username}}/">{{Class.user.username}}</a></td>
@@ -38,19 +43,22 @@
                     </table>
 					
                     {% if User = Class.user %}
-                    
-                    	<center>
+                        <center>
                         <a href="/edit_class/{{Class.id}}/" class="btn btn-info" align="right"><i class = "icon icon-repeat"></i> Change information</a><br /><br />
+                        {% if Class.number_students > list_students.count %}
                         <select name="add_students">
-                        	<option value="">---User to adding---</option>
-                        	{% for User in list_user %}
-								{% if User not in list_students %}
-									<option value="{{User.id}}">{{User.username}}</option>
-								{% endif %}
+                            <option value="">---User to adding---</option>
+                            {% for User in list_user %}
+                                {% if User not in list_students %}
+                                    <option value="{{User.id}}">{{User.username}}</option>
+                                {% endif %}
                             {% endfor %}
                         </select> 
                         &nbsp;
                         <button type="submit" class="btn btn-success"><i class="icon icon-plus"></i> Add</button>
+                        {% else %}
+                            <em><font color="#FF0000">This class is full students</font></em>
+                        {% endif %}
                         </center>
                         
                     {% else %}
