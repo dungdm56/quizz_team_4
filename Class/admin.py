@@ -3,11 +3,13 @@ from Class.models import Classes
 from Quizz.models import Quizzes
 from Quizz.models import Questions
 
-#===============================================================================
+
+#===================================================
 class QuizzesInline(admin.TabularInline):
     model = Quizzes
     extra = 3
-#===============================================================================
+#===================================================
+
 
 # class manage data in admin page
 class ClassesAdmin(admin.ModelAdmin):
@@ -19,7 +21,8 @@ class ClassesAdmin(admin.ModelAdmin):
                 ('Date Create', {'fields': ['update_date']})]
     inlines = [QuizzesInline]
     list_display = ('class_name', 'teacher_name', 'user')
-    
+
+
 class QuizzesAdmin(admin.ModelAdmin):
     fieldsets = [('Class', {'fields': ['in_class']}),
                 ('Title', {'fields': ['title']}),
@@ -27,7 +30,8 @@ class QuizzesAdmin(admin.ModelAdmin):
                 ('Time Update', {'fields': ['update_time']}),
                 ('Date Create', {'fields': ['update_date']})]
     list_display = ('title', 'update_time')
-    
+
+
 class QuestionsAdmin(admin.ModelAdmin):
     fieldsets = [('In Quizzes', {'fields': ['quizz']}),
                 ('Question', {'fields': ['ques']}),
@@ -37,10 +41,10 @@ class QuestionsAdmin(admin.ModelAdmin):
                 ('Answer 4', {'fields': ['ans4']}),
                 ('Answer correct', {'fields': ['correct_ans']})]
     list_display = ('ques', 'quizz')
-    
+
+
 # Register models
-#===============================================================================
+#====================================================
 admin.site.register(Classes, ClassesAdmin)
 admin.site.register(Quizzes, QuizzesAdmin)
 admin.site.register(Questions, QuestionsAdmin)
-#===============================================================================

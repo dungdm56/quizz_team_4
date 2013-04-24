@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}Search page{% endblock %}
+
+{% block content_after_login %}
+	{% if show_result %}
+		<h2>Result for searching keyword "<i>{{query}}</i>"</h2>
+		<br />
+		<div class="tabbable" style="margin-bottom: 18px;">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#tab1" data-toggle="tab"><b>User</b> ( {{user_search.count}} results)</a></li>
+				<li><a href="#tab2" data-toggle="tab"><b>Class</b> ( {{class_search.count}} results)</a></li>
+				<li><a href="#tab3" data-toggle="tab"><b>Quizz</b> ( {{quizz_search.count}} results)</a></li>
+			</ul>
+			<div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+				<div class="tab-pane active" id="tab1">
+					{% if user_search.count = 0 %}
+						<font color="#FF3300"><em>No result</em></font>
+					{% else %}
+						{% for User in user_search %}
+							<strong><a href="/member/{{User.id}}-{{User.username}}/">{{User.username}}</a></strong>
+							<br />
+						{% endfor %}
+					{% endif %}
+					<br /><br />
+				</div>
+				<div class="tab-pane" id="tab2">
+					{% if class_search.count = 0 %}
+						<font color="#FF3300"><em>No result</em></font>
+					{% else %}
+						{% for Class in class_search %}
+							<strong><a href="/class/{{Class.id}}/">{{Class.class_name}}</a></strong>
+							<br />
+						{% endfor %}
+					{% endif %}
+					<br /><br />
+				</div>
+				<div class="tab-pane" id="tab3">
+					{% if quizz_search.count = 0 %}
+						<font color="#FF3300"><em>No result</em></font>
+					{% else %}
+						{% for Quizz in quizz_search %}
+							<strong><a href="/quizzes/{{Quizz.id}}/">{{Quizz.title}}</a></strong>
+							<br />
+						{% endfor %}
+					{% endif %}
+					<br /><br />
+				</div>
+			</div>
+		</div>
+	{% else %}
+		<h2>Please enter keyword to searching</h2>
+		<br />
+		<br />
+	{% endif %}
+	
+{% endblock %}
+
+{% block content_before_login %}
+	{% if show_result %}
+		<h2>Result for searching keyword "<i>{{query}}</i>"</h2>
+		<br />
+		<div class="tabbable" style="margin-bottom: 18px;">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#tab1" data-toggle="tab"><b>User</b> ( {{user_search.count}} results)</a></li>
+				<li><a href="#tab2" data-toggle="tab"><b>Class</b> ( {{class_search.count}} results)</a></li>
+				<li><a href="#tab3" data-toggle="tab"><b>Quizz</b> ( {{quizz_search.count}} results)</a></li>
+			</ul>
+			<div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+				<div class="tab-pane active" id="tab1">
+					{% if user_search.count = 0 %}
+						<font color="#FF3300"><em>No result</em></font>
+					{% else %}
+						{% for User in user_search %}
+							<strong><a href="/member/{{User.id}}-{{User.username}}/">{{User.username}}</a></strong>
+							<br />
+						{% endfor %}
+					{% endif %}
+					<br /><br />
+				</div>
+				<div class="tab-pane" id="tab2">
+					{% if class_search.count = 0 %}
+						<font color="#FF3300"><em>No result</em></font>
+					{% else %}
+						{% for Class in class_search %}
+							<strong><a href="/class/{{Class.id}}/">{{Class.class_name}}</a></strong>
+							<br />
+						{% endfor %}
+					{% endif %}
+					<br /><br />
+				</div>
+				<div class="tab-pane" id="tab3">
+					{% if quizz_search.count = 0 %}
+						<font color="#FF3300"><em>No result</em></font>
+					{% else %}
+						{% for Quizz in quizz_search %}
+							<strong><a href="/quizzes/{{Quizz.id}}/">{{Quizz.title}}</a></strong>
+							<br />
+						{% endfor %}
+					{% endif %}
+					<br /><br />
+				</div>
+			</div>
+		</div>
+	{% else %}
+		<h2>Please enter keyword to searching</h2>
+		<br />
+		<br />
+	{% endif %}
+	
+{% endblock %}

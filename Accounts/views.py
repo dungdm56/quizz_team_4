@@ -8,10 +8,15 @@ from django.views.decorators.csrf import csrf_protect
 from Class.models import Classes
 from django.contrib.auth.models import User
 from Accounts.models import RegistrationForm, EditProfileForm
+from Quiz_Management.views import search
 
 @csrf_protect
 # the definiton for signup method
 def signup(request):
+    #method for searching
+    if request.GET.has_key('search'):
+        return search(request)
+    
     if request.method == 'POST':
         form = RegistrationForm(request.POST)  # get form from request in web page
         # check the validation of sign-up form
@@ -34,6 +39,10 @@ def signup(request):
 
 # the definition for login method
 def login_user(request):
+    #method for searching
+    if request.GET.has_key('search'):
+        return search(request)
+    
     # get data for variable
     username = request.POST.get('username')
     password = request.POST.get('password')
@@ -56,28 +65,52 @@ def login_user(request):
 
 # the definition for logout method
 def logout(request):
+    #method for searching
+    if request.GET.has_key('search'):
+        return search(request)
+    
     auth.logout(request)  # user logout method of Python
     return HttpResponseRedirect('/')
 
 # the definition for home method
 def home(request):
+    #method for searching
+    if request.GET.has_key('search'):
+        return search(request)
+    
     return render_to_response('home.html', context_instance=RequestContext(request, { 'User': request.user}))  # return home.html and some context
 
 # the definition for about method
 def about(request):
+    #method for searching
+    if request.GET.has_key('search'):
+        return search(request)
+    
     return render_to_response('about.html', context_instance=RequestContext(request, { 'User': request.user}))  # return about.html and some context
 
 # the definition for signup_success method
 def signup_success(request):
+    #method for searching
+    if request.GET.has_key('search'):
+        return search(request)
+    
     return render_to_response('signup_success.html', context_instance=RequestContext(request, { 'User': request.user}))  # return signup_success.html and some context
 
 # the definition for member_list method
 def member_list(request):
+    #method for searching
+    if request.GET.has_key('search'):
+        return search(request)
+    
     return render_to_response('member_list.html',
         context_instance=RequestContext(request, {'User': request.user, 'member_list': User.objects.all()}))  # return member_list.html and some context
 
 # the definition for view_profile method
 def view_profile(request, member_id, member_username):
+    #method for searching
+    if request.GET.has_key('search'):
+        return search(request)
+    
     # get some variable for context of web page
     member = get_object_or_404(User, id=member_id, username=member_username)
     classes_list = Classes.objects.filter(user=member)
@@ -86,6 +119,10 @@ def view_profile(request, member_id, member_username):
 
 # the definition for edit_profile method
 def edit_profile(request):
+    #method for searching
+    if request.GET.has_key('search'):
+        return search(request)
+    
     if request.method == 'POST':  # check if the method of request is POST or not
         form = EditProfileForm(request.POST, instance=request.user)  # get form from request
         # check the form is valid or not

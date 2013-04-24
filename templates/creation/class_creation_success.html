@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+<!--Title-->
+{% block title %}Class {{Class.class_name}} created successful{% endblock %}
+
+<!--body-->
+{% block content_before_login %}
+    <center><h3>Sorry! You are not in account<br />Please <a href="/login/">log in </a> or <a href="register"> create new account </a>to use this page .</h3></center>
+{% endblock %}
+
+{% block content_after_login %}
+    <center>
+        <font color="#33CC33"><h2>Congratulation !<br />The class <font color="#6633CC">{{Class.class_name}}</font> have been created successful at {{Class.update_time}} in {{Class.update_date}} !</h2><br /></font>
+        <h3>Please <a href="/class/{{Class.id}}/">click here</a> to go to this class !</h3>
+	</center>
+    <br />
+    <br />
+{% endblock %}
+
