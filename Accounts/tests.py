@@ -9,8 +9,10 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 
 class TestUser(TestCase):
-    #fixtures = ['accounts_views_testdata.json']
-    
+    """
+    Create and run test
+    """
+    #  fixtures = ['accounts_views_testdata.json']
     def setUp(self):
         self.user1 = User.objects.create_user(
             username = 'user1',
@@ -24,20 +26,22 @@ class TestUser(TestCase):
         )
         self.user1.save()
         self.user2.save()
-        
+
     def test_form(self):
-        
-        #Test artribute
+        """
+        Test artribute
+        """
         self.assertEqual(self.user1.username, 'user1')
         self.assertEqual(self.user1.id, 1)
         self.assertEqual(self.user2.id, 2)
-        
         self.user2.email = 'email22@gmail.com'
         self.assertEqual(self.user2.email, 'email22@gmail.com')
-        
+
 class TestViews(TestCase):
-    #fixtures = ['accounts_views_testdata.json']
-    
+    """
+    Test for views.py
+    """
+    #  fixtures = ['accounts_views_testdata.json']
     def setUp(self):
         self.user = User.objects.create_user(
             username = 'admin',
@@ -46,40 +50,53 @@ class TestViews(TestCase):
         )
         self.user.save()
         self.client = Client()
-    #Test home page
+
     def test_home_page(self):
+        """
+        Tes home page
+        """
         resp = self.client.get('/home/')
         self.assertEqual(resp.status_code, 200)
-    #Test if a user is register successfully
+
     def test_signup(self):
+        """
+        Test if a user is register successfully
+        """
         response = self.client.get('/register/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Create new account')
         self.assertContains(response, 'Password comfirmation')
-        
-        response = self.client.post('/register/', {'username': 'abc', 'password' : 'abc', 'email': 'abc@gmail.com'})
+        response = self.client.post('/register/',
+            {'username': 'abc', 'password' : 'abc', 'email': 'abc@gmail.com'})
         self.assertEqual(response.status_code, 200)
-    
-    #Test whether or not a user is logged successfully
+
     def test_login_user(self):
+        """
+        Test whether or not a user is logged successfully
+        """
         is_logged_in = self.client.login(username = 'admin', password = 'admin')
         self.assertEqual(is_logged_in, True)
-    
-    #Test if a user is logout successfully
+
     def test_logout(self):
+        """
+        Test if a user is logout successfully
+        """
         self.client.login(username = 'admin', password = 'admin')
         is_logged_out = self.client.logout()
         self.assertEqual(is_logged_out, None)
-    #Test page
+
     def test_about_page(self):
+        """
+        Test page
+        """
         response = self.client.get('/about/')
         self.assertEqual(response.status_code, 200)
-        
-    #Test status of a success user
+
     def test_signup_success(self):
+        """
+        Test status of a success user
+        """
         response = self.client.get('/signup_success/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'failure', 0)
         self.assertContains(response, 'Successfully', 1)
-
-
