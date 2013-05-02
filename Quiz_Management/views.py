@@ -26,9 +26,16 @@ def home(request):
         classes_list_joined = Classes.objects.filter(students=request.user.id)
         classes_list_another = Classes.objects.all()
         # return home.html and some context
-        return render_to_response('home.html', context_instance=RequestContext(request, {'User': request.user, 'classes_list': classes_list, 'classes_list_another': classes_list_another, 'classes_list_joined': classes_list_joined}))
+        variables = RequestContext(request, {
+            'User': request.user,
+            'classes_list': classes_list,
+            'classes_list_another': classes_list_another,
+            'classes_list_joined': classes_list_joined
+        })
+        return render_to_response('home.html', variables)
     else:
-        return render_to_response('home.html', context_instance=RequestContext(request, {'User': request.user}))  # return home.html and some context
+        variables = RequestContext(request, {'User': request.user})
+        return render_to_response('home.html', variables)  # return home.html and some context
 
 
 def search(request):
@@ -47,6 +54,18 @@ def search(request):
         user_search = User.objects.filter(q_user)[:10]
         class_search = Classes.objects.filter(q_class)[:10]
         quizz_search = Quizzes.objects.filter(q_quizz)[:10]
-        return render_to_response('search_page.html', context_instance=RequestContext(request, {'User': request.user, 'show_result': show_result, 'query': query, 'class_search': class_search, 'quizz_search': quizz_search, 'user_search': user_search}))
+        variables = RequestContext(request, {
+            'User': request.user,
+            'show_result': show_result,
+            'query': query,
+            'class_search': class_search,
+            'quizz_search': quizz_search,
+            'user_search': user_search
+        })
+        return render_to_response('search_page.html', variables)
     else:
-        return render_to_response('search_page.html', context_instance=RequestContext(request, {'User': request.user, 'show_result': show_result}))
+        variables = RequestContext(request, {
+            'User': request.user,
+            'show_result': show_result
+        })
+        return render_to_response('search_page.html', variables)

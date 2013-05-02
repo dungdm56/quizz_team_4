@@ -1,3 +1,4 @@
+# create your model here
 '''
 Created on Feb 28, 2013
 '''
@@ -10,13 +11,12 @@ import re
 email_length = 50
 text_length = 60
 
-
 class RegistrationForm(forms.ModelForm):
     """
     Made registration form to register account
     """
     username = forms.CharField(
-        label='Username', max_length = text_length)
+        label='Username', max_length = text_length)  
     first_name = forms.CharField(
         label='First name', max_length = text_length, required = False)
     last_name = forms.CharField(
@@ -41,10 +41,6 @@ class RegistrationForm(forms.ModelForm):
         fields = ('username', 'email', 'email_confirm',
             'password', 'password_confirm', 'first_name', 'last_name')
 
-    # The definition for checking if the username is valid or not
-    def __init__(self):
-        pass
-
     def clean_username(self):
         """
         Check username
@@ -57,12 +53,12 @@ class RegistrationForm(forms.ModelForm):
                 'Username can only contain alphanumeric'
                 ' character and underscore')
         # check if the username was exist or not
-        try:
-            User.objects.get(username=username)
+        try:			
+            User.objects.get(username=username)					
         except ObjectDoesNotExist:
             return username
         raise forms.ValidationError(
-            'That username already registerd by'
+            'That username already registerd by' 
              ' different user, choose another one')
 
     def clean_password_confirm(self):
@@ -131,12 +127,13 @@ class EditProfileForm(forms.ModelForm):
 
     class Meta:
         """
-        Meta class
+        Meta class 
         """
         model = User
         # Show order of file when it display
-        fields = ('first_name', 'last_name', 'email',
+        fields = ('first_name', 'last_name', 'email', 
                   'new_password', 'confirm_password', 'current_password')
+
 
     def clean_current_password(self):
         """
@@ -148,7 +145,7 @@ class EditProfileForm(forms.ModelForm):
             raise ValidationError(
                 'You must enter you current password to save change.')
         return cur_pass
-
+ 
     def clean_email(self):
         """
         check if the email is valid or not
@@ -177,7 +174,7 @@ class EditProfileForm(forms.ModelForm):
         save valid data after edition
         """
         user = self.instance  # get user
-        user.email = self.cleaned_data.get('email', user.email)
+        user.email = self.cleaned_data.get('email', user.email) 
         user.first_name = self.cleaned_data.get('first_name', user.first_name)
         user.last_name = self.cleaned_data.get('last_name', user.last_name)
         new_password = self.cleaned_data['new_password']

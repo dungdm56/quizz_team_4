@@ -59,6 +59,11 @@ def classes(request, id_class):
     _class = get_object_or_404(Classes,  id=id_class)
     quizz = Quizzes.objects.filter(in_class=_class)
     list_user = User.objects.exclude(username=request.user.username)
+    # lock and unlock class
+    if request.POST.get('unlock_class'):
+        _class.locked = False
+    if request.POST.get('lock_class'):
+        _class.locked = True
     #method for searching
     if request.GET.has_key('search'):
         return search(request)

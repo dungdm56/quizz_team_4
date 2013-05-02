@@ -21,13 +21,13 @@ def create_quizz(request, id_class):
         form = MakeQuizzForm(request.POST)
         # Make sure that form is valid.
         if form.is_valid():
-            quizz = Quizzes.objects.create(							# Create new quizz.
-                in_class=in_class,									# Set class of new quizz.
-                title=form.cleaned_data['title'],					# Get title of quizz from form.
-                time_limit=form.cleaned_data['time_limit'],			# Get limited time from form.
-                update_time=datetime.datetime.now(),
-                update_date=datetime.datetime.now(),				# Get update date of quizz.
-                number_questions=0,									# Initial number questions of new quizz is 0.
+            quizz = Quizzes.objects.create(					# Create new quizz.
+                in_class=in_class,							# Set class of new quizz.
+                title=form.cleaned_data['title'],			# Get title of quizz from form.
+                time_limit=form.cleaned_data['time_limit'],  # Get limited time from form.
+                update_time=datetime.datime.now(),
+                update_date=datetime.datetime.now(),		# Get update date of quizz.
+                number_questions=0,							# Initial number questions of new quizz is 0.
             )
             quizz.save()
 
@@ -57,17 +57,17 @@ def edit_quizz(request, id_quizz):
         quizz_form = MakeQuizzForm(request.POST)
         # For the situation that no change in title.
         if quizz.title == request.POST.get('title'):
-            quizz.time_limit = request.POST.get('time_limit')		# Get update limited time for this quizz.
-            quizz.save()											# Save changes of this quizz.
+            quizz.time_limit = request.POST.get('time_limit')   # Get update limited time for this quizz.
+            quizz.save()										# Save changes of this quizz.
 
             link = '/quizzes/' + str(quizz.id) + '/'
             return HttpResponseRedirect(link)		# Return to quizz page.
 
         # For the situation that quizz title is changed.
         if quizz_form.is_valid():
-            quizz.title = request.POST.get('title')					# Get update title for this quizz.
-            quizz.time_limit = request.POST.get('time_limit')		# Get update limited time for this quizz.
-            quizz.save()											# Save changes of this quizz.
+            quizz.title = request.POST.get('title')				# Get update title for this quizz.
+            quizz.time_limit = request.POST.get('time_limit')   # Get update limited time for this quizz.
+            quizz.save()										# Save changes of this quizz.
 
             link = '/quizzes/' + str(quizz.id) + '/'
             return HttpResponseRedirect(link) 	# Return to quizz page.
@@ -134,7 +134,7 @@ def create_question(request, id_quizz):
             link = '/quizzes/' + str(question.quizz.id) + '/'
             return HttpResponseRedirect(link)			# Return to quizz page.
         else:
-            state = 'Please enter all information'					# Return error if some fields is missed.
+            state = 'Please enter all information'		# Return error if some fields is missed.
 
     variables = RequestContext(request, {
         'User': request.user,

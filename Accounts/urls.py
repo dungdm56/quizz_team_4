@@ -6,7 +6,6 @@ Created on Apr 1, 2013
 from django.conf.urls import patterns, url
 from Accounts.views import member_list, view_profile, edit_profile
 
-
 # url for account
 urlpatterns = patterns('',
      url(r'^$', member_list),

@@ -13,7 +13,7 @@ class Classes(models.Model):
     update_time = models.TimeField('Time published')  # Time of the last update
     update_date = models.DateField('Date published')  # Date of the last update
     students = models.ManyToManyField(User)  # Contain all students of this class
-    blocked = False
+    locked = models.BooleanField(default = False)
 
     def __unicode__(self):  # Show as title of this class
         return self.class_name

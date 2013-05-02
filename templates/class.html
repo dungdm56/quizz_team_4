@@ -10,9 +10,18 @@
 {% block content_after_login %}
 <!-- Forms
 ================================================== -->
+{% if Class.locked %}
+    <center><h3>Sorry, this class have been locked!!!</h3></center>
+    {% if User = Class.user %}
+        <form>
+        <center><input type = 'submit' name = 'unlock_class' value = 'Unlock Class' class = 'btn btn-danger'></enter>
+        </form>
+    {% endif %}
+{% else %}
+<!-- Ablove is code for locked class -->
 <section id="forms">
     <div class="page-header">
-    	<font color="#66CC99"><h1>{{Class.class_name}}</h1></font>
+        <font color="#66CC99"><h1>{{Class.class_name}}</h1></font>
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
@@ -41,7 +50,7 @@
                             <td><a href="/member/{{Class.user.id}}-{{Class.user.username}}/">{{Class.user.username}}</a></td>
                         </tr>
                     </table>
-					
+
                     {% if User = Class.user %}
                         <center>
                         <a href="/edit_class/{{Class.id}}/" class="btn btn-info" align="right"><i class = "icon icon-repeat"></i> Change information</a><br /><br />
@@ -62,22 +71,22 @@
                         </center>
                         
                     {% else %}
-                    	{% if User in list_students %}
-							<center>
-								<button type="submit" name="students_delete" class="btn btn-danger" value="{{User.username}}"}><i class="icon icon-share"></i> Out class</button>
-							</center>
-                    	{% endif %}
+                        {% if User in list_students %}
+                            <center>
+                                <button type="submit" name="students_delete" class="btn btn-danger" value="{{User.username}}"}><i class="icon icon-share"></i> Out class</button>
+                            </center>
+                        {% endif %}
                     {% endif %}
-					
+                    
                 </form>
-				
-			
+                
+            
             {% if User = Class.user %}
             
-            	<font color="#0033FF"><h2>Students Manage</h2></font>
+                <font color="#0033FF"><h2>Students Manage</h2></font>
                 <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
-				
-                	{% if length != 0 %}
+                
+                    {% if length != 0 %}
                     
                         <table class="table table-condensed " >
                             <thead>
@@ -98,16 +107,16 @@
                         </table>
                         <center><button type="submit" class="btn btn-success">Submit</button></center>
                     {% else %}
-                    	<center><font color="#FF0000">Class has not students</font></center>
+                        <center><font color="#FF0000">Class has not students</font></center>
                     {% endif %}
-					
+                    
                 </form>
                 
             {% else %}
-            	<font color="#0033FF"><h2>Students</h2></font>
+                <font color="#0033FF"><h2>Students</h2></font>
                 <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}
-				
-                	{% if length != 0 %}
+                
+                    {% if length != 0 %}
                     
                         <table class="table table-condensed " >
                             <thead>
@@ -124,11 +133,11 @@
                             </tbody>
                         </table>
                     {% else %}
-                    	<center><font color="#FF0000">Class has not students</font></center>
+                        <center><font color="#FF0000">Class has not students</font></center>
                     {% endif %}
                 </form>
             {% endif %}
-			
+            
         </div>
         <div class="span8">
             <font color="#0033FF"><h2>Quizzes</h2></font>
@@ -160,19 +169,21 @@
                         {% endfor %}
                     </table>
                     {% if User not in list_students and User != Class.user %}
-                    	<center>
-                        	<font color="#FF0000">You are not student of this class !Please send request to teacher if you want become a students of this class !</font>
+                        <center>
+                            <font color="#FF0000">You are not student of this class !Please send request to teacher if you want become a students of this class !</font>
                         </center>
                     {% endif %}
-					
+
                     {% if User = Class.user %}
-                        <br />
-                        <center><a href="/create_quizz/{{Class.id}}/" class="btn btn-success" align="right"><i class = "icon icon-plus"></i> Create new Quizzes</a></center>
+                        <br /><center>
+                            <a href="/create_quizz/{{Class.id}}/" class="btn btn-success" align="right"><i class = "icon icon-plus"></i> Create new Quizzes</a>
+                            <input type="submit" name = 'lock_class' value = 'Lock Class' class="btn btn-danger">
+                        </center>
                     {% endif %}
                 </form>
               <p>&nbsp;</p>
             </div>
         </div>
     </div>
+{% endif %}
 {% endblock %}
-
