@@ -13,7 +13,7 @@
 <!--Clock
 ================================================== -->
 {% if Quizzes.number_questions != 0 %}
-	<script language="JavaScript">
+    <script language="JavaScript">
         function auto_sub(){
             alert("Time out! The system will auto submit result and calculate your result !");
             document.answer.submit();
@@ -29,7 +29,7 @@
 ==================================================-->
 <section id="forms">
     <div class="page-header">
-    	<font color="#66CC99"><h1>{{Quizzes.title}}</h1></font>
+        <font color="#66CC99"><h1>{{Quizzes.title}}</h1></font>
     </div>
     
     {% if Quizzes.number_questions != 0 %}
@@ -44,59 +44,59 @@
                             <td width="106"><h5>Start time</h5></td>
                             <td width="10">:</td>
                             <td width="171">
-                            	<script language="javascript">
-								<!-- 
-								today = new Date();
-								document.write(today.getHours()," : ",today.getMinutes()," on ", today.getDate()," / ",today.getMonth()+1);
-								//-->
-								</script>
+                                <script language="javascript">
+                                <!-- 
+                                today = new Date();
+                                document.write(today.getHours()," : ",today.getMinutes()," on ", today.getDate()," / ",today.getMonth()+1);
+                                //-->
+                                </script>
                             </td>
                         </tr>
                         <tr>
                             <td><h5>Finish Time</h5></td>
                             <td>:</td>
                             <td>
-                            	<script language="javascript">
-								<!-- 
-								today = new Date();
-								minute1 = today.getMinutes()+ {{Quizzes.time_limit}};
-								minute = minute1 % 60;
-								hour1 = today.getHours() + ( minute1 - minute)/60;
-								hour = hour1 % 24;
-								date = today.getDate() + (hour1 - hour )/24;
-								document.write(hour," : ",minute ," on ",date," / ",today.getMonth()+1);
-								//-->
-								</script>
+                                <script language="javascript">
+                                <!-- 
+                                today = new Date();
+                                minute1 = today.getMinutes()+ {{Quizzes.time_limit}};
+                                minute = minute1 % 60;
+                                hour1 = today.getHours() + ( minute1 - minute)/60;
+                                hour = hour1 % 24;
+                                date = today.getDate() + (hour1 - hour )/24;
+                                document.write(hour," : ",minute ," on ",date," / ",today.getMonth()+1);
+                                //-->
+                                </script>
                             </td>
                         </tr>
                         <tr>
-                        	<td><h5>Time Remaining</h5>
+                            <td><h5>Time Remaining</h5>
                             </td>
                             <td>:</td>
                             <td>
                             <li class="lino"><font color="#FF0033" size="3"><span id="time1">10</span></font> <i>mins</i> <font color="#FF0033" size="3"><span id="time">10</span></font> <i>secs</i>
                             
-							<script type="text/javascript"> 
-								var jgt = 00;
-								var jgt2 = {{Quizzes.time_limit}};
-								document.getElementById('time').innerHTML = jgt;
-								document.getElementById('time1').innerHTML = jgt2;
-								function stime(){
-									document.getElementById('time').innerHTML = jgt;
-									document.getElementById('time1').innerHTML = jgt2;
-									jgt = jgt - 1;
-									if(jgt == -1){
-										jgt = 59;
-										jgt2 = jgt2 - 1;
-									}
-									if(jgt == 0 && jgt2 ==0){
-										clearInterval(timing);
-									}
-								}
-								var timing = setInterval("stime();",1000);
-							</script>
+                            <script type="text/javascript"> 
+                                var jgt = 00;
+                                var jgt2 = {{Quizzes.time_limit}};
+                                document.getElementById('time').innerHTML = jgt;
+                                document.getElementById('time1').innerHTML = jgt2;
+                                function stime(){
+                                    document.getElementById('time').innerHTML = jgt;
+                                    document.getElementById('time1').innerHTML = jgt2;
+                                    jgt = jgt - 1;
+                                    if(jgt == -1){
+                                        jgt = 59;
+                                        jgt2 = jgt2 - 1;
+                                    }
+                                    if(jgt == 0 && jgt2 ==0){
+                                        clearInterval(timing);
+                                    }
+                                }
+                                var timing = setInterval("stime();",1000);
+                            </script>
                             
-							</td>
+                            </td>
                         </tr>
                     </table>
                 </form>
@@ -108,7 +108,7 @@
                 <font color="#0033FF"><h2>Quizzes</h2></font>
                     <form class = "well form-horizontal" action = "." method = "post" name="answer" align = "left"> {% csrf_token %}
                         {% for Questions in questions_list %}
-                        	<h5><em>Question</em> : {{Questions.ques}}</h5><br />
+                            <h5><em>Question</em> : {{Questions.ques}}</h5><br />
                             <label class="radio">
                                 <input type="radio" name="Answer{{Questions.id}}" id="Answer1" value="1"><font color="#6633CC">A.</font> {{Questions.ans1}}
                             </label>
@@ -134,8 +134,8 @@
     </div>
     
     {% else %}
-    	<div class="container-fluid">
-        	<div class="row-fluid">
+        <div class="container-fluid">
+            <div class="row-fluid">
                 <div class="span12">
                     <font color="#FF0000"><h2>Sorry</h2></font>
                     <form class = "well form-horizontal" action = "." method = "post" align = "left"> {% csrf_token %}

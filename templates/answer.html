@@ -12,7 +12,7 @@
 ================================================== -->
 <section id="forms">
     <div class="page-header">
-    	<font color="#66CC99"><h1>{{Quizzes.title}}</h1></font>
+        <font color="#66CC99"><h1>{{Quizzes.title}}</h1></font>
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
@@ -53,7 +53,7 @@
                         <font color="#00CC66"><h3>The answers for questions in {{Quizzes.title}} quizzes</h3></font>
                         <hr align="center" color="#CC0000" noshade size="3" width="80%">
                         <table class="table table-striped">
-                        	<thead>
+                            <thead>
                                 <tr>
                                     <th><font color="#0033FF">Question</font></th>
                                     <th><font color="#0033FF">Correct answers</font></th>
@@ -62,10 +62,10 @@
                             <tbody>
                             {% for Questions in questions_list %}
                                 <tr>
-                                	<td >{{Questions.ques}}</td>
+                                    <td >{{Questions.ques}}</td>
                                     <td >
-                                    	{% if Questions.correct_ans = 1 %}
-                                        	A. {{Questions.ans1}}
+                                        {% if Questions.correct_ans = 1 %}
+                                            A. {{Questions.ans1}}
                                         {% else %}
                                             {% if Questions.correct_ans = 2 %}
                                                 B. {{Questions.ans2}}
