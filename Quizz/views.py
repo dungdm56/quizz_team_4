@@ -25,6 +25,7 @@ def create_quizz(request, id_class):
                 in_class=in_class,							# Set class of new quizz.
                 title=form.cleaned_data['title'],			# Get title of quizz from form.
                 time_limit=form.cleaned_data['time_limit'],  # Get limited time from form.
+                update_time=datetime.datetime.now(),
                 update_date=datetime.datetime.now(),		# Get update date of quizz.
                 number_questions=0,							# Initial number questions of new quizz is 0.
             )

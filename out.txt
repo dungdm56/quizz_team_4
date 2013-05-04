@@ -1,0 +1,177 @@
+************* Module Class
+C:  1,0: Missing docstring
+************* Module Class.admin
+R: 21,0:ClassesAdmin: Too many public methods (50/20)
+R: 36,0:QuizzesAdmin: Too many public methods (50/20)
+R: 48,0:QuestionsAdmin: Too many public methods (50/20)
+************* Module Class.models
+W: 41,4:RegistrationClassForm.Meta: Class has no __init__ method
+R: 41,4:RegistrationClassForm.Meta: Too few public methods (0/2)
+R: 31,0:RegistrationClassForm: Badly implemented Container, implements __getitem__ but not __delitem__, __len__, __setitem__
+W: 98,4:EditClassInformationForm.Meta: Class has no __init__ method
+R: 98,4:EditClassInformationForm.Meta: Too few public methods (0/2)
+R: 89,0:EditClassInformationForm: Badly implemented Container, implements __getitem__ but not __delitem__, __len__, __setitem__
+************* Module Class.tests
+C: 14,4:TestView.setUp: Invalid name "setUp" for type method (should match [a-z_][a-z0-9_]{2,30}$)
+C: 29,4:TestView.test_teacher_name: Missing docstring
+C: 33,4:TestView.test_number_students: Missing docstring
+C: 37,4:TestView.test_username: Missing docstring
+C: 41,4:TestView.test_class_name: Missing docstring
+C: 46,4:TestView.test_class_create_success: Missing docstring
+E: 48,25:TestView.test_class_create_success: Instance of 'WSGIRequest' has no 'status_code' member (but some types could not be inferred)
+C: 51,4:TestView.test_class_list: Missing docstring
+E: 53,25:TestView.test_class_list: Instance of 'WSGIRequest' has no 'status_code' member (but some types could not be inferred)
+C: 56,4:TestView.test_edit_class: Missing docstring
+E: 58,25:TestView.test_edit_class: Instance of 'WSGIRequest' has no 'status_code' member (but some types could not be inferred)
+W: 34,8:TestView.test_number_students: Attribute 'students' defined outside __init__
+W: 30,8:TestView.test_teacher_name: Attribute 'teacher_name' defined outside __init__
+W: 42,8:TestView.test_class_name: Attribute 'class_name' defined outside __init__
+W: 38,8:TestView.test_username: Attribute 'user_name' defined outside __init__
+R: 10,0:TestView: Too many public methods (67/20)
+
+
+Report
+======
+184 statements analysed.
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |229    |57.83 |229      |=          |
++----------+-------+------+---------+-----------+
+|docstring |86     |21.72 |86       |=          |
++----------+-------+------+---------+-----------+
+|comment   |25     |6.31  |25       |=          |
++----------+-------+------+---------+-----------+
+|empty     |56     |14.14 |56       |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |5      |5          |=          |80.00       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |10     |10         |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|method   |14     |14         |=          |50.00       |7.14     |
++---------+-------+-----------+-----------+------------+---------+
+|function |4      |4          |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |9      |9        |=          |
++-----------+-------+---------+-----------+
+|refactor   |8      |8        |=          |
++-----------+-------+---------+-----------+
+|warning    |6      |6        |=          |
++-----------+-------+---------+-----------+
+|error      |3      |3        |=          |
++-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++-------------+-------+--------+---------+-----------+
+|module       |error  |warning |refactor |convention |
++=============+=======+========+=========+===========+
+|Class.tests  |100.00 |66.67   |12.50    |88.89      |
++-------------+-------+--------+---------+-----------+
+|Class.models |0.00   |33.33   |50.00    |0.00       |
++-------------+-------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++-----------+------------+
+|message id |occurrences |
++===========+============+
+|C0111      |8           |
++-----------+------------+
+|W0201      |4           |
++-----------+------------+
+|R0904      |4           |
++-----------+------------+
+|E1103      |3           |
++-----------+------------+
+|W0232      |2           |
++-----------+------------+
+|R0924      |2           |
++-----------+------------+
+|R0903      |2           |
++-----------+------------+
+|C0103      |1           |
++-----------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at 7.93/10 (previous run: 7.93/10)
+
+External dependencies
+---------------------
+::
+
+    Quiz_Management 
+      \-views 
+        \-search (Class.views)
+    Quizz 
+      \-models 
+        \-Questions (Class.admin)
+        \-Quizzes (Class.admin,Class.views)
+    django 
+      \-contrib 
+      | \-admin (Class.admin)
+      | \-auth 
+      |   \-models 
+      |     \-User (Class.models,Class.tests,Class.views)
+      \-core 
+      | \-exceptions 
+      |   \-ValidationError (Class.models)
+      \-db 
+      | \-models (Class.models)
+      \-forms (Class.models)
+      \-http 
+      | \-HttpResponseRedirect (Class.views)
+      \-shortcuts 
+      | \-get_object_or_404 (Class.views)
+      | \-render_to_response (Class.views)
+      \-template 
+      | \-RequestContext (Class.views)
+      \-test 
+        \-TestCase (Class.tests)
+
+
+
