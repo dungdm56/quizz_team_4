@@ -1,9 +1,12 @@
-
+'''
+view.py
+'''
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from Class.models import RegistrationClassForm, Classes, EditClassInformationForm
+from Class.models import RegistrationClassForm, \
+    Classes, EditClassInformationForm
 from Quizz.models import Quizzes
 from django.shortcuts import get_object_or_404
 import datetime
@@ -11,8 +14,10 @@ from Quiz_Management.views import search
 
 
 # Create your views here.
-#=======create new class===============================================
 def create_class(request):
+    '''
+    Create new class
+    '''
     #method for searching
     if request.GET.has_key('search'):
         return search(request)
@@ -43,6 +48,9 @@ def create_class(request):
 
 #=======when you create new class successful============================
 def create_class_success(request,  id_class):
+    '''
+    Create class success
+    '''
     #method for searching
     if request.GET.has_key('search'):
         return search(request)
@@ -56,6 +64,9 @@ def create_class_success(request,  id_class):
 
 #=======the return when you visit any class=============================
 def classes(request, id_class):
+    '''
+    class in view
+    '''
     _class = get_object_or_404(Classes,  id=id_class)
     quizz = Quizzes.objects.filter(in_class=_class)
     list_user = User.objects.exclude(username=request.user.username)
@@ -96,6 +107,9 @@ def classes(request, id_class):
 
 #=======when you want to edit your class================================
 def edit_class(request, id_class):
+    '''
+    edit class
+    '''
     _class = get_object_or_404(Classes, id=id_class)
     state = ''
 
@@ -111,7 +125,8 @@ def edit_class(request, id_class):
             class_form = EditClassInformationForm(request.POST)
         # check information after edit are valid or not
         if class_form.is_valid():
-            if int(request.POST.get('number_students')) >= _class.students.all().count():
+            number_students = int(request.POST.get('number_students'))
+            if number_students >= _class.students.all().count():
                 _class.user = request.user
                 _class.class_name = request.POST.get('class_name')
                 _class.number_students = request.POST.get('number_students')
@@ -120,7 +135,8 @@ def edit_class(request, id_class):
                 link = '/class/' + str(_class.id) + '/'
                 return HttpResponseRedirect(link)
             else:
-                state = 'The number of students in class at the moment is larger than the number you enter'
+                state = 'The number of students in class \
+                    at the moment is larger than the number you enter'
     
     variables = RequestContext(request, {
         'User': request.user,
