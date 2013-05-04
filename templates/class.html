@@ -10,11 +10,13 @@
 {% block content_after_login %}
 <!-- Forms
 ================================================== -->
+{{state}}
 {% if Class.locked %}
     <center><h3>Sorry, this class have been locked!!!</h3></center>
     {% if User = Class.user %}
-        <form>
-        <center><input type = 'submit' name = 'unlock_class' value = 'Unlock Class' class = 'btn btn-danger'></enter>
+        <br />
+        <form action = "." method = "post"> {% csrf_token %}
+        <center><input type='submit' name='unlock_class' value='Unlock Class' class='btn btn-danger'></center>
         </form>
     {% endif %}
 {% else %}

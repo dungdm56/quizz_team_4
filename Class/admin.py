@@ -18,9 +18,10 @@ class ClassesAdmin(admin.ModelAdmin):
                 ('Teacher', {'fields': ['teacher_name']}),
                 ('User created', {'fields': ['user']}),
                 ('Time Create', {'fields': ['update_time']}),
-                ('Date Create', {'fields': ['update_date']})]
+                ('Date Create', {'fields': ['update_date']}),
+                ('Lock', {'fields': ['locked']})]
     inlines = [QuizzesInline]
-    list_display = ('class_name', 'teacher_name', 'user')
+    list_display = ('class_name', 'teacher_name', 'user','locked')
 
 
 class QuizzesAdmin(admin.ModelAdmin):

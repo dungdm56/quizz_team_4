@@ -64,6 +64,7 @@ def classes(request, id_class):
         _class.locked = False
     if request.POST.get('lock_class'):
         _class.locked = True
+    _class.save()
     #method for searching
     if request.GET.has_key('search'):
         return search(request)
