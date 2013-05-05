@@ -34,6 +34,7 @@ def create_class(request):
                 update_time=datetime.datetime.now(),
                 update_date=datetime.datetime.now()
             )
+            # Save new class
             new_class.save()
             link = '/create_class_success/' + str(new_class.id) + '/'
             return HttpResponseRedirect(link)
