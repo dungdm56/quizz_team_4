@@ -8,7 +8,7 @@ from Class.models import Classes
 
 class Quizzes(models.Model):
     objects = models.Manager()
-    in_class = models.ForeignKey(Classes, db_column='in_class')		# Class of this quizz.
+    in_class = models.ForeignKey(Classes, db_column='in_class', related_name='Classes')		# Class of this quizz.
     title = models.CharField(max_length=200)						# Title of this quizz
     update_time = models.TimeField('date published')				# The time the Quizz was created
     update_date = models.DateField('Date published')				# The date the Quizz was created
@@ -44,7 +44,7 @@ class MakeQuizzForm(forms.Form):
 
 class Questions(models.Model):
     objects = models.Manager()
-    quizz = models.ForeignKey(Quizzes)				# quizz of this question.
+    quizz = models.ForeignKey(Quizzes, related_name='Quizzes')				# quizz of this question.
     ques = models.TextField(max_length=1000)		# Question component of question packet.
     ans1 = models.CharField(max_length=500)			# The first answer to choose.
     ans2 = models.CharField(max_length=500)			# The second answer to choose.
