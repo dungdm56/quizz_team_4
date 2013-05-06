@@ -163,15 +163,15 @@ def edit_question(request, id_question):
     if request.method == 'POST':
         # Check that all update fields are entered.
         if ques and answer1 and answer2 and answer3 and answer4 and correct_ans:
-                quizz = in_quizz						# Set quizz of  new question is abobe quizz.
-                question.ques = ques					# Set update question for this Question.
-                question.ans1 = answer1					# Set the first answer for this Question.
-                question.ans2 = answer2					# Set the second answer for this Question.
-                question.ans3 = answer3					# Set the third answer for this Question.
-                question.ans4 = answer4					# Set the fourth answer for this Question.
+                quizz = in_quizz			# Set quizz of  new question is abobe quizz.
+                question.ques = ques		# Set update question for this Question.
+                question.ans1 = answer1		# Set the first answer for this Question.
+                question.ans2 = answer2		# Set the second answer for this Question.
+                question.ans3 = answer3		# Set the third answer for this Question.
+                question.ans4 = answer4		# Set the fourth answer for this Question.
                 question.correct_ans = correct_ans		# Set update index correct answer for this Question.
-                question.save()			# Save changes of question.
-                quizz.save()			# Save changes of quizz.
+                question.save()		# Save changes of question.
+                quizz.save()		# Save changes of quizz.
 
                 link = '/quizzes/' + str(question.quizz.id) + '/'
                 return HttpResponseRedirect(link)

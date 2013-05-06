@@ -1,7 +1,6 @@
 '''
 Admin
 '''
-# pylint: disable-msg=R0904
 from django.contrib import admin
 from Class.models import Classes
 from Quizz.models import Quizzes

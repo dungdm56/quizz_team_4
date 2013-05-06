@@ -8,23 +8,23 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 import re
 
 # global variable
-email_length = 50
-text_length = 60
+EMAIL_LENGTH = 50
+TEXT_LENGTH = 60
 
 class RegistrationForm(forms.ModelForm):
     """
     Made registration form to register account
     """
     username = forms.CharField(
-        label='Username', max_length = text_length)  
+        label='Username', max_length = TEXT_LENGTH)  
     first_name = forms.CharField(
-        label='First name', max_length = text_length, required = False)
+        label='First name', max_length = TEXT_LENGTH, required = False)
     last_name = forms.CharField(
-        label='Last name', max_length = text_length, required = False)
+        label='Last name', max_length = TEXT_LENGTH, required = False)
     email = forms.EmailField(
-        label='Email', max_length = email_length)
+        label='Email', max_length = EMAIL_LENGTH)
     email_confirm = forms.EmailField(
-        label='Email confirmation', max_length = email_length)
+        label='Email confirmation', max_length = EMAIL_LENGTH)
     password = forms.CharField(
         label='Password', widget = forms.PasswordInput)
     password_confirm = forms.CharField(
